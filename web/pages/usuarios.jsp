@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <form action="pesquisar" method="GET">
+        <form action="control?command=Pesquisar" method="POST">
             <div class="form-group">
                 <label for="nome">Pesquise: </label>
                 <input type="search" name="nome" id="nome">
@@ -11,7 +11,7 @@
             <div class="col-lg-1 col-md-2">
                     <div class="sm-usuario">
                         <img src="${usuario.foto}" alt="${usuario.nome}">
-                        <span><a href="exibirUsuario?email=${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
+                        <span><a href="control?command=ExibirUsuario&email=${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
                 </div>
             </div>
         </c:forEach>

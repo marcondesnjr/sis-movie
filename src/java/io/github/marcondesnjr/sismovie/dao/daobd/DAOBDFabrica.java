@@ -1,11 +1,12 @@
 
 package io.github.marcondesnjr.sismovie.dao.daobd;
 
+import io.github.marcondesnjr.sismovie.dao.DAOAmizade;
 import io.github.marcondesnjr.sismovie.dao.DAOEstado;
 import io.github.marcondesnjr.sismovie.dao.DAOGenero;
 import io.github.marcondesnjr.sismovie.dao.FabricaDAO;
-import io.github.marcondesnjr.sismovie.dao.FilmeDAO;
-import io.github.marcondesnjr.sismovie.dao.UsuarioDAO;
+import io.github.marcondesnjr.sismovie.dao.DAOFilme;
+import io.github.marcondesnjr.sismovie.dao.DAOUsuario;
 import java.sql.Connection;
 
 /**
@@ -21,12 +22,12 @@ public class DAOBDFabrica implements FabricaDAO{
     }
  
     @Override
-    public UsuarioDAO criarDaoUsuario() {
-        return new UsuarioDAOBD(conn);
+    public DAOUsuario criarDaoUsuario() {
+        return new DAOBDUsuario(conn);
     }
 
     @Override
-    public FilmeDAO criarDaoFilme() {
+    public DAOFilme criarDaoFilme() {
         return new DAOBDFilme(conn);
     }
 
@@ -38,6 +39,11 @@ public class DAOBDFabrica implements FabricaDAO{
     @Override
     public DAOEstado criarDAOEstado() {
         return new DAOBDEstado(conn);
+    }
+
+    @Override
+    public DAOAmizade criarDAOAmizade() {
+        return new DAOBDAmizade(conn);
     }
     
 }

@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public interface DAOGenero {
+public interface DAOGenero extends AutoCloseable{
 
     public void persistir(String gen) throws PersistenceException;
 

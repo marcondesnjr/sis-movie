@@ -7,6 +7,7 @@ package io.github.marcondesnjr.sismovie.gerenciadordados;
 
 import io.github.marcondesnjr.sismovie.Estado;
 import io.github.marcondesnjr.sismovie.dao.CriadorFabrica;
+import io.github.marcondesnjr.sismovie.dao.DAOEstado;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import java.util.List;
 
@@ -16,7 +17,9 @@ import java.util.List;
  */
 public class GerenciadorEstado {
     public static List<Estado> todosEstados() throws PersistenceException{
-        return CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS)
-                .criarDAOEstado().todosEstados();
+        DAOEstado dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDAOEstado();
+        List<Estado> estados = dao.todosEstados();
+        try{dao.close();}catch(Exception ex){}
+        return estados;
     }
 }

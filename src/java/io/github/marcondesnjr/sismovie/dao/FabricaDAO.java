@@ -3,8 +3,9 @@ package io.github.marcondesnjr.sismovie.dao;
 public interface FabricaDAO {
 
 
-  public UsuarioDAO criarDaoUsuario();
-  public FilmeDAO criarDaoFilme();
+  public DAOUsuario criarDaoUsuario();
+  public DAOFilme criarDaoFilme();
   public DAOGenero criarDAOGenero();
   public DAOEstado criarDAOEstado();
+  public DAOAmizade criarDAOAmizade();
 }

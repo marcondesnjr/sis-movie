@@ -1,7 +1,7 @@
 package io.github.marcondesnjr.sismovie.dao.daobd;
 
 import io.github.marcondesnjr.sismovie.Filme;
-import io.github.marcondesnjr.sismovie.dao.FilmeDAO;
+import io.github.marcondesnjr.sismovie.dao.DAOFilme;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class DAOBDFilme implements FilmeDAO {
+public class DAOBDFilme implements DAOFilme {
 
     private Connection conn;
 

@@ -1,17 +1,24 @@
 package io.github.marcondesnjr.sismovie;
 
-
-public class SolicitacaoAmizade {
-
+/**
+ *
+ * @author José Marcondes do Nascimento Junior
+ */
+public class Solicitacao {
     private Usuario remetente;
     private Usuario destinatario;
-    private EstadoAmizade estado;
+    private int status;
+    
+    public static final int PENDENTE = 0;
+    public static final int ACEITO = 1;
 
-    public SolicitacaoAmizade(Usuario remetente, Usuario destinatario) {
+    public Solicitacao(Usuario remetente, Usuario destinatario) {
         this.remetente = remetente;
         this.destinatario = destinatario;
-        this.estado = EstadoAmizade.PEDENTE;
-    }   
+        this.status = PENDENTE;
+    }
+
+    
     
     public Usuario getRemetente() {
         return remetente;
@@ -29,13 +36,14 @@ public class SolicitacaoAmizade {
         this.destinatario = destinatario;
     }
 
-    public EstadoAmizade getEstado() {
-        return estado;
+    public int getStatus() {
+        return status;
     }
 
-    public void setEstado(EstadoAmizade estado) {
-        this.estado = estado;
+    public void setStatus(int status) {
+        this.status = status;
     }
     
-
+    
+    
 }

@@ -1,14 +1,13 @@
 package io.github.marcondesnjr.sismovie.dao;
 
 import io.github.marcondesnjr.sismovie.Filme;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  *
  * @author José Marcondes do Nascimento Junior
  */
-public interface FilmeDAO {
+public interface DAOFilme extends AutoCloseable{
     
     public void persistir(Filme fl) throws PersistenceException;
     public void excluir (int id) throws PersistenceException;

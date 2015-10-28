@@ -4,7 +4,7 @@ import io.github.marcondesnjr.sismovie.Administrador;
 import io.github.marcondesnjr.sismovie.Usuario;
 import java.util.List;
 
-public interface UsuarioDAO {
+public interface DAOUsuario extends AutoCloseable{
 
     public void persistir(Usuario usuario) throws PersistenceException, AlreadyExistsException;
 

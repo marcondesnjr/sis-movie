@@ -1,4 +1,4 @@
-package io.github.marcondesnjr.sismovie.servlets;
+package io.github.marcondesnjr.sismovie.commands;
 
 import io.github.marcondesnjr.sismovie.Estado;
 import io.github.marcondesnjr.sismovie.SisMovie;
@@ -8,17 +8,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLDecoder;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.FileItem;
@@ -32,17 +27,16 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
  * @author José Marcondes do Nascimento Junior
  */
 @MultipartConfig
-public class CadastroUsuarioServlet extends HttpServlet{
+public class SingIn implements Command{
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response){
         try {
             
             // Create a factory for disk-based file items
             DiskFileItemFactory factory = new DiskFileItemFactory();
 
             // Configure a repository (to ensure a secure temp location is used)
-            ServletContext servletContext = this.getServletConfig().getServletContext();
+            ServletContext servletContext = request.getServletContext();
             File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
             factory.setRepository(repository);
 
@@ -89,27 +83,15 @@ public class CadastroUsuarioServlet extends HttpServlet{
                 SisMovie.cadastrarUsuario(foto,nome, sobrenome, email, senha, dataNasc, cidade, est);
             }
             
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("control?command=Index");
             
-
+            return null;
         } catch (AlreadyExistsException ex) {
-            response.sendError(444,"Usuario já existe");
+            return null;
         }catch (Exception ex) {
-           response.sendError(333, "Erro na base de dados");
+            return null;
         }
 
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     private RequestContext createRequestContext(HttpServletRequest req) {

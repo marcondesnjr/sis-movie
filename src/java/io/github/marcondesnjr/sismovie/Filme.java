@@ -23,11 +23,9 @@ public class Filme {
         this.ano = ano;
         this.generos = new ArrayList<>();
         this.atores = new ArrayList<>();
-        this.diretores =new ArrayList<>();
+        this.diretores = new ArrayList<>();
     }
-
-    
-    
+   
     public String getFoto() {
         return foto;
     }

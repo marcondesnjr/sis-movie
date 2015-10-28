@@ -3,7 +3,7 @@
         <div class="col-md-2">
             <div class="panel-usr-left">
                 <img id="foto-perfil" src="${usuario.foto}" alt="${usuario.nome}">
-                <img alt="Mandar convite">
+                <a href="control?command=SolicitarAmizade&email=${usuario.email}"><img alt="Mandar convite"></a>
             </div>
         </div>
         <div class="col-md-10">

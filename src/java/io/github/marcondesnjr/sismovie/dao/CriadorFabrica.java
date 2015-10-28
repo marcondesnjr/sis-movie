@@ -1,5 +1,6 @@
 package io.github.marcondesnjr.sismovie.dao;
 
+import io.github.marcondesnjr.sismovie.dao.daobd.ConfigBD;
 import io.github.marcondesnjr.sismovie.dao.daobd.ConnectionManager;
 import io.github.marcondesnjr.sismovie.dao.daobd.DAOBDFabrica;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ public class CriadorFabrica {
         switch (tipo) {
             case 0: {
                 try {
-                    return new DAOBDFabrica(ConnectionManager.getConnection());
+                    return new DAOBDFabrica(ConfigBD.ConfigurarDataSource().getConnection());
                 } catch (SQLException ex) {
                     throw new PersistenceException(ex); 
                 }

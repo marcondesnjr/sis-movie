@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package io.github.marcondesnjr.sismovie.servlets;
 
-import io.github.marcondesnjr.sismovie.SisMovie;
-import io.github.marcondesnjr.sismovie.dao.PersistenceException;
+import io.github.marcondesnjr.sismovie.commands.Command;
+import io.github.marcondesnjr.sismovie.dao.daobd.ConfigBD;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Marcondes do Nascimento Junior
  */
-@WebServlet(name = "LoadEstados", urlPatterns = {"/LoadEstados"})
-public class LoadEstados extends HttpServlet {
+@WebServlet(name = "controller", urlPatterns = {"/control"})
+public class Controller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +30,19 @@ public class LoadEstados extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            request.setAttribute("estados", SisMovie.todosNomesEstados());
-        } catch (PersistenceException ex) {
-            response.sendError(333);
+            String commandName = request.getParameter("command");
+            Command instance = (Command) Class.forName("io.github.marcondesnjr.sismovie.commands."+commandName).newInstance();
+            String resp = instance.execute(request, response);
+            if(resp != null)
+                request.getRequestDispatcher(resp).forward(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,14 +74,11 @@ public class LoadEstados extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    public void destroy() {
+        super.destroy();
+        ConfigBD.destroyDataSource();
+    }
+
 
 }

@@ -100,15 +100,30 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="index">Home</a></li>
+                                    <li class="active"><a href="control?command=Index">Home</a></li>
                                         <c:if test="${usrLog eq null}">
-                                        <li><a href="sing-in">Cadastre-se</a></li>
+                                        <li><a href="control?command=SingInPage">Cadastre-se</a></li>
                                         </c:if>
                                         <c:if test="${usrLog ne null}">
-                                        <li><a href="home">Minha conta</a></li>
-                                        <li><a href="busca-usr">Encontre Amigos</a></li>
+                                        <li><a href="control?command=Home">Minha conta</a></li>
+                                        <li><a href="control?command=LoadUsuario">Encontre Amigos</a></li>
                                         <li><a href="gallery.html">Meus Grupos</a></li>
-                                        <li><a href="log-off">Logoff</a></li>
+                                        <li><a href="control?command=LogOff">Logoff</a></li>
+                                        </c:if>
+                                        <c:if test="${adm eq '1'}" >
+                                        <li><div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    Dropdown
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="#">Novo filme</a></li>
+                                                    <li><a href="#">Another action</a></li>
+                                                    <li><a href="#">Something else here</a></li>
+                                                    <li><a href="#">Separated link</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
                                         </c:if>
                                 </ul>
                                 <div class="clearfix"></div>

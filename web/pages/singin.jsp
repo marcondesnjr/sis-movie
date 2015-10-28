@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4 col-lg-4 col-sm-2"></div>
         <div class="col-md-4 col-lg-4 col-sm-8 col-xs-12">
-            <form action="CadastroUsuario" method="post" enctype="multipart/form-data">
+            <form action="control?command=SingIn" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="foto">Faça Upload da sua foto</label>
                     <input class="form-control" type="file" name="foto" id="foto">

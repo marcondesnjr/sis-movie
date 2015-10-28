@@ -1,7 +1,8 @@
 package io.github.marcondesnjr.sismovie;
 
-import io.github.marcondesnjr.armazenadorbuffer.Ilike;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Usuario{
@@ -15,6 +16,7 @@ public class Usuario{
     private String cidade;
     private Estado estado;
     private String foto;
+    private List<Solicitacao> amizades;
 
     public Usuario(String nome, String sobrenome, String email, String senha,
             LocalDate dataNasc, String cidade, Estado estado) {
@@ -25,6 +27,7 @@ public class Usuario{
         this.dataNasc = dataNasc;
         this.cidade = cidade;
         this.estado = estado;
+        this.amizades = new ArrayList<>();
     }
 
     public String getNome() {
@@ -121,7 +124,17 @@ public class Usuario{
         }
         return true;
     }
-        
     
+    public void addSolicitacao(Solicitacao sol){
+        amizades.add(sol);
+    }
+
+    public List<Solicitacao> getAmizades() {
+        return amizades;
+    }
+        
+    public void aceitarSolicitacao(Solicitacao sol){
+        sol.setStatus(sol.ACEITO);
+    }
     
 }

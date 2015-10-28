@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	 version="3.1">
-    
-    
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>JSP Files</web-resource-name>
@@ -18,71 +12,16 @@
             <description>No direct browser access to JSP files</description>
             <role-name>NobodyHasThisRole</role-name>
         </auth-constraint>
-    </security-constraint> 
-    
-    
+    </security-constraint>
     <error-page>
         <error-code>210</error-code>
         <location>/login-usuario.jsp</location>
     </error-page>
-    
-    
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
             <include-prelude>header.jspf</include-prelude>
         </jsp-property-group>
     </jsp-config>
-    
-    <servlet>
-        <servlet-name>CadastroUsuario</servlet-name>
-        <servlet-class>io.github.marcondesnjr.sismovie.servlets.CadastroUsuarioServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CadastroUsuario</servlet-name>
-        <url-pattern>/CadastroUsuario</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>realizarLogin</servlet-name>
-        <servlet-class>io.github.marcondesnjr.sismovie.servlets.RealizarLoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>realizarLogin</servlet-name>
-        <url-pattern>/realizarLogin</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>exibirUsuario</servlet-name>
-        <servlet-class>io.github.marcondesnjr.sismovie.servlets.ExibirUsuarioServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>exibirUsuario</servlet-name>
-        <url-pattern>/exibirUsuario</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>cadastrarFilme</servlet-name>
-        <servlet-class>io.github.marcondesnjr.sismovie.servlets.CadastrarFilme</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>cadastrarFilme</servlet-name>
-        <url-pattern>/cadastrarFilme</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>index</servlet-name>
-        <servlet-class>io.github.marcondesnjr.sismovie.servlets.IndexServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>index</servlet-name>
-        <url-pattern>/index</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>sing-in</servlet-name>
-        <servlet-class>io.github.marcondesnjr.sismovie.servlets.SingInServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>sing-in</servlet-name>
-        <url-pattern>/sing-in</url-pattern>
-    </servlet-mapping>
-        
+
 </web-app>

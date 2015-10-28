@@ -53,5 +53,11 @@ public class DAOBDEstado implements DAOEstado{
             }
         }
     }
+
+    @Override
+    public void close() throws Exception {
+        conn.close();
+    }
+    
     
 }

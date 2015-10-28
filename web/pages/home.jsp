@@ -56,9 +56,28 @@
         </div>
         <%-- Coluna da Direita --%>
         <div class="col-lg-4">
+            <%-- Linha de solicitacoes--%>
+            <div class="row">
+                <h2>Solicitações</h2>
+                <c:forEach items="${solicitacoes}" var="sol">
+                    <div class="col-md-12">
+                        <span>${sol.remetente.nome}</span>
+                        <a href="control?command=AceitarSolicitacao&email=${sol.remetente.email}">Aceitar</a>
+                        <a href="control?command=RejeitarSolicitacao&email=${sol.remetente.email}">Rejeitar</a>
+                    </div>
+                </c:forEach>
+            </div>
             <%-- Linha de amigos--%>
             <div class="row">
                 <h2>Amigos</h2>
+                <c:forEach items="${usuarios}" var="usuario">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="sm-usuario">
+                            <img src="${usuario.foto}" alt="${usuario.nome}">
+                            <span><a href="control?command=ExibirUsuario&email=${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
             <%-- Linha de grupos --%>
             <div class="row">

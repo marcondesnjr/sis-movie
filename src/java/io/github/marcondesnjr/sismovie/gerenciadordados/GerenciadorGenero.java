@@ -1,7 +1,7 @@
-
 package io.github.marcondesnjr.sismovie.gerenciadordados;
 
 import io.github.marcondesnjr.sismovie.dao.CriadorFabrica;
+import io.github.marcondesnjr.sismovie.dao.DAOGenero;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import java.util.List;
 
@@ -11,12 +11,17 @@ import java.util.List;
  */
 public class GerenciadorGenero {
     public void salvar(String gen) throws PersistenceException{
-        CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS)
-                .criarDAOGenero().persistir(gen);
+        DAOGenero dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS)
+                .criarDAOGenero();
+        dao.persistir(gen);
+        try{dao.close();}catch(Exception ex){}
     }
     
     public static List<String> todosGeneros() throws PersistenceException{
-        return CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS)
-                .criarDAOGenero().todosGeneros();
+        DAOGenero dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDAOGenero();
+        List<String> gen = dao.todosGeneros();
+        try{dao.close();}catch(Exception ex){}
+        return gen;
+        
     }
 }

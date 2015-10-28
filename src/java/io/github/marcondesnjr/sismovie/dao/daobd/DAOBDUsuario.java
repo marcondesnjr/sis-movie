@@ -5,7 +5,7 @@ import io.github.marcondesnjr.sismovie.Administrador;
 import io.github.marcondesnjr.sismovie.Estado;
 import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
-import io.github.marcondesnjr.sismovie.dao.UsuarioDAO;
+import io.github.marcondesnjr.sismovie.dao.DAOUsuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,13 +16,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAOBD implements UsuarioDAO {
+public class DAOBDUsuario implements DAOUsuario {
 
     private final Connection conn;
     private final int TIPO_USUARIO = 0;
     private final int TIPO_ADM = 1;
 
-    public UsuarioDAOBD(Connection conn) {
+    public DAOBDUsuario(Connection conn) {
         this.conn = conn;
     }
     
@@ -178,6 +178,11 @@ public class UsuarioDAOBD implements UsuarioDAO {
                     usrs.add(usr);
                 }
                 return usrs;
+    }
+
+    @Override
+    public void close() throws Exception {
+        conn.close();
     }
     
 
