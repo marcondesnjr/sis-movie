@@ -16,10 +16,11 @@ import java.util.List;
  * @author José Marcondes do Nascimento Junior
  */
 public class GerenciadorEstado {
-    public static List<Estado> todosEstados() throws PersistenceException{
-        DAOEstado dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDAOEstado();
-        List<Estado> estados = dao.todosEstados();
-        try{dao.close();}catch(Exception ex){}
-        return estados;
+
+    public static List<Estado> todosEstados() throws PersistenceException {
+        try (DAOEstado dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDAOEstado();) {
+            List<Estado> estados = dao.todosEstados();
+            return estados;
+        }
     }
 }

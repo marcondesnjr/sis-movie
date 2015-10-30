@@ -10,7 +10,8 @@ import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author José Marcondes do Nascimento Junior
@@ -66,8 +67,31 @@ public class DAOBDFilme implements DAOFilme {
     }
 
     @Override
-    public void localizar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Filme localizar(int id) throws PersistenceException{
+        String sql = "SELECT * FROM FILME WHERE id = ?";
+        try(PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, id);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    String foto = rs.getString("foto");
+                    String titulo = rs.getString("titulo");
+                    String sinopse = rs.getString("sinopse");
+                    Year ano = Year.parse(rs.getString("ano"));
+                    Filme fm = new Filme(foto, titulo, sinopse, ano);
+                    fm.setId(rs.getInt("id"));
+                    conn.commit();
+                    return fm;
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
+        }
     }
 
     @Override
@@ -85,8 +109,13 @@ public class DAOBDFilme implements DAOFilme {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void close() {
-
+    @Override
+    public void close(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBDFilme.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -107,6 +136,7 @@ public class DAOBDFilme implements DAOFilme {
                     fl.setGeneros(daoGF.localizarGeneroFilme(fl));
                     fl.setAtores(daoAt.localizarAtorFilme(fl));
                     fl.setDiretores(daoD.localizarDiretorFilme(fl));
+                    fl.setId(rs.getInt("id"));
                     films.add(fl);
                 }
                 conn.commit();

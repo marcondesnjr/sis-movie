@@ -1,5 +1,31 @@
-<div class="container-fluid">
+<div class="modal fade" id="new-group">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Crie um novo grupo</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="control?command=CriarGrupo" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" maxlength="30" name="nome" id="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="descricao">Descricao:</label>
+                        <textarea class="form-control" name="descricao" id="descricao"></textarea>
+                    </div>
+                    <input type="submit" value="Criar">
+                    <input type="hidden" value="${filme.id}" name="idFilme">
+                </form>
+            </div>
+        </div>
 
+    </div>
+</div>
+
+
+<div class="container-fluid">
     <div class="row">
         <div class="col-lg-2">
             <img id="pfimg" src="${usrLog.foto}" alt="Imagem de perfil">
@@ -8,6 +34,7 @@
                 <input type="file" name="foto" id="foto">
                 <input type="submit">
             </form>
+            <a href="#" data-toggle="modal" data-target="#new-group"><img src alt="Criar Novo Grupo"></a>
         </div>
         <div class="col-lg-6">
             <h1>Edite as suas informações</h1>
@@ -71,7 +98,7 @@
             <div class="row">
                 <h2>Amigos</h2>
                 <c:forEach items="${usuarios}" var="usuario">
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-md-3">
                         <div class="sm-usuario">
                             <img src="${usuario.foto}" alt="${usuario.nome}">
                             <span><a href="control?command=ExibirUsuario&email=${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
@@ -82,6 +109,13 @@
             <%-- Linha de grupos --%>
             <div class="row">
                 <h2>Grupos</h2>
+                <c:forEach items="${usrLog.grupos}" var="grupo">
+                    <div class="col-md-3 col-lg-3">
+                        <div class="sm-usuario">
+                            <a href="control?command=ExbGrupo&id=${grupo.id}"> ${grupo.nome}</a>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </div>

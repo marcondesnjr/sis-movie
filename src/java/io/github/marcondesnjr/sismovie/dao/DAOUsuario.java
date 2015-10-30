@@ -1,6 +1,5 @@
 package io.github.marcondesnjr.sismovie.dao;
 
-import io.github.marcondesnjr.sismovie.Administrador;
 import io.github.marcondesnjr.sismovie.Usuario;
 import java.util.List;
 
@@ -17,10 +16,12 @@ public interface DAOUsuario extends AutoCloseable{
     public List<Usuario> localizarNome(String nome);
 
     public Usuario localizar(String login, String senha) throws PersistenceException;
-
-    public void persistir(Administrador adm) throws PersistenceException, AlreadyExistsException;
     
     public List<Usuario> localizar() throws PersistenceException;
     
     public List<Usuario> perquisarNome(String nome) throws PersistenceException;
+
+    @Override
+    public void close();
+    
 }

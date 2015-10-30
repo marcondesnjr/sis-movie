@@ -23,5 +23,32 @@
             <include-prelude>header.jspf</include-prelude>
         </jsp-property-group>
     </jsp-config>
-
+    <listener>
+        <listener-class>io.github.marcondesnjr.sismovie.servlets.ContextListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <jsp-file>/pages/index.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>exibir-filme</servlet-name>
+        <jsp-file>/pages/exb-filme.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>exibir-filme</servlet-name>
+        <url-pattern>/exibir-filme</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>exbGrupo</servlet-name>
+        <jsp-file>/pages/exbgrupo.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>exbGrupo</servlet-name>
+        <url-pattern>/exbGrupo</url-pattern>
+    </servlet-mapping>
 </web-app>

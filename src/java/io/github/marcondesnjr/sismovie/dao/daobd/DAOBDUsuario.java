@@ -1,8 +1,8 @@
 package io.github.marcondesnjr.sismovie.dao.daobd;
 
 import io.github.marcondesnjr.sismovie.dao.AlreadyExistsException;
-import io.github.marcondesnjr.sismovie.Administrador;
 import io.github.marcondesnjr.sismovie.Estado;
+import io.github.marcondesnjr.sismovie.Permissao;
 import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import io.github.marcondesnjr.sismovie.dao.DAOUsuario;
@@ -15,12 +15,12 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DAOBDUsuario implements DAOUsuario {
 
     private final Connection conn;
-    private final int TIPO_USUARIO = 0;
-    private final int TIPO_ADM = 1;
 
     public DAOBDUsuario(Connection conn) {
         this.conn = conn;
@@ -28,15 +28,7 @@ public class DAOBDUsuario implements DAOUsuario {
     
     
     @Override
-    public void persistir(Usuario usuario) throws PersistenceException {
-        try {
-            persitirTipos(usuario, TIPO_USUARIO);
-        } catch (AlreadyExistsException ex) {
-            throw new PersistenceException(ex);
-        }
-    }
-
-    private void persitirTipos(Usuario usuario, int tipo) throws AlreadyExistsException, PersistenceException{
+    public void persistir(Usuario usuario) throws PersistenceException, AlreadyExistsException{
         try (PreparedStatement ps = conn.prepareStatement("INSERT INTO USUARIO VALUES (?,?,?,?,?,?,?,?,?,?)")) {
             ps.setString(1, usuario.getEmail());
             ps.setString(2, usuario.getSenha());
@@ -47,10 +39,9 @@ public class DAOBDUsuario implements DAOUsuario {
             ps.setDate(7, Date.valueOf(usuario.getDataNasc()));
             ps.setString(8, usuario.getCidade());
             ps.setString(9, usuario.getEstado().name());
-            ps.setInt(10, tipo);
+            ps.setString(10, usuario.getPermissao().name());
             ps.executeUpdate();
             conn.commit();
-            conn.close();
         } catch (SQLException ex) {
             Usuario usr = localizar(usuario.getEmail());
             if(usr != null){
@@ -59,6 +50,7 @@ public class DAOBDUsuario implements DAOUsuario {
             throw new PersistenceException(ex);
         }
     }
+
 
     @Override
     public Usuario excluir(Usuario usuario) {
@@ -72,27 +64,17 @@ public class DAOBDUsuario implements DAOUsuario {
 
     @Override
     public Usuario localizar(String login) throws PersistenceException {
-        try {
-            Usuario usr = localizarDoTipo(login, TIPO_USUARIO);
-            if (usr == null)
-                usr = localizarDoTipo(login, TIPO_ADM);
-            return usr;
+        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM USUARIO WHERE email = ?")) {
+            ps.setString(1, login);
+            try(ResultSet rs = ps.executeQuery()){
+                List<Usuario> usr = handlerUsuario(rs);
+                return usr.size() > 0?usr.get(0):null;
+            }
         } catch (SQLException ex) {
             throw new PersistenceException(ex);
         }
     }
  
-    private Usuario localizarDoTipo(String login, int tipo) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM USUARIO WHERE email = ? AND adm = ?")) {
-            ps.setString(1, login);
-            ps.setInt(2, tipo);
-            try(ResultSet rs = ps.executeQuery()){
-                List<Usuario> usr = constructUser(rs);
-                return usr.size() > 0?usr.get(0):null;
-            }
-        }
-    }
-
     @Override
     public List<Usuario> localizarNome(String nome) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -100,31 +82,23 @@ public class DAOBDUsuario implements DAOUsuario {
 
     @Override
     public Usuario localizar(String login, String senha) throws PersistenceException {
-        try {
-            Usuario usr = localizarDoTipo(login, senha, TIPO_USUARIO);
-            if (usr == null)
-                usr = localizarDoTipo(login, senha, TIPO_ADM);
-            return usr;
-        } catch (SQLException ex) {
-            throw new PersistenceException(ex);
-        }
-    }
-
-    private Usuario localizarDoTipo(String login, String senha, int tipo) throws SQLException {
-        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM USUARIO WHERE email = ? AND senha = ? AND adm = ?")) {
+        try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM USUARIO WHERE email = ? AND senha = ?")) {
             ps.setString(1, login);
             ps.setString(2, senha);
-            ps.setInt(3, tipo);
             try(ResultSet rs = ps.executeQuery()){
-                List<Usuario> usr = constructUser(rs);
+                List<Usuario> usr = handlerUsuario(rs);
+                conn.commit();
                 return usr.size() > 0? usr.get(0):null;
             }
+            
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
         }
-    }
-
-    @Override
-    public void persistir(Administrador adm) throws PersistenceException ,AlreadyExistsException{
-        persitirTipos(adm, TIPO_ADM);
     }
 
     @Override
@@ -132,7 +106,7 @@ public class DAOBDUsuario implements DAOUsuario {
         String sql = "SELECT * FROM USUARIO";
         try(Statement stm = conn.createStatement()){
             try(ResultSet rs = stm.executeQuery(sql)){
-                return constructUser(rs);
+                return handlerUsuario(rs);
             }
         } catch (SQLException ex) {
             throw new PersistenceException(ex);
@@ -146,7 +120,7 @@ public class DAOBDUsuario implements DAOUsuario {
             ps.setString(1, "%" + nome + "%");
             ps.setString(2, "%" + nome + "%");
            try(ResultSet rs = ps.executeQuery()){
-               return constructUser(rs);
+               return handlerUsuario(rs);
            } 
         } catch (SQLException ex) {
             throw new PersistenceException(ex);
@@ -154,7 +128,7 @@ public class DAOBDUsuario implements DAOUsuario {
     }
     
     
-    private List<Usuario> constructUser(ResultSet rs) throws SQLException{
+    protected static List<Usuario> handlerUsuario(ResultSet rs) throws SQLException{
         List<Usuario> usrs = new ArrayList<>();
                 while(rs.next()){
                     String nome = rs.getString("nome");
@@ -165,14 +139,8 @@ public class DAOBDUsuario implements DAOUsuario {
                     String foto = rs.getString("foto");
                     String cidade = rs.getString("cidade");
                     Estado estado = Estado.valueOf(rs.getString("estado"));
-                    int adm = rs.getInt("adm");
-                    Usuario usr;
-                    if(adm == 1){
-                        usr = new Administrador(nome, sobrenome, email, null, dataNasc, cidade, estado);
-                    }
-                    else{
-                        usr = new Usuario(nome, sobrenome, email, null, dataNasc, cidade, estado);
-                    }
+                    Permissao per = Permissao.valueOf(rs.getString("permissao"));
+                    Usuario usr = new Usuario(nome, sobrenome, email, null, dataNasc, cidade, estado,per);
                     usr.setFoto(foto);
                     usr.setApelido(apelido);
                     usrs.add(usr);
@@ -181,8 +149,12 @@ public class DAOBDUsuario implements DAOUsuario {
     }
 
     @Override
-    public void close() throws Exception {
-        conn.close();
+    public void close(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBDUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 

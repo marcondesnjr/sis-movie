@@ -8,6 +8,10 @@ package io.github.marcondesnjr.sismovie.commands;
 import io.github.marcondesnjr.sismovie.Amizade;
 import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
+import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorGrupo;
+import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorParticipantes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,11 +26,13 @@ public class Home implements Command{
         try {
             new LoadEstados().execute(request, response);
             Usuario usr = (Usuario) request.getSession().getAttribute("usrLog");
+            usr = GerenciadorParticipantes.carregarGrupos(usr);
             request.setAttribute("solicitacoes", Amizade.getSolicitacoesRecebidas(usr));
             request.setAttribute("usuarios", Amizade.getAmigos(usr));
             return "pages/home.jsp";
         } catch (PersistenceException ex) {
-            return ErrorPages.PERSISTENCE_ERROR.getPAGE();
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,null,ex);
+            return "persistenceError";
         }
     }
 }

@@ -30,6 +30,7 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+
             String commandName = request.getParameter("command");
             Command instance = (Command) Class.forName("io.github.marcondesnjr.sismovie.commands."+commandName).newInstance();
             String resp = instance.execute(request, response);

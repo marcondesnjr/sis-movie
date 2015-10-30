@@ -1,25 +1,59 @@
 package io.github.marcondesnjr.sismovie;
 
-import java.util.List;
-import java.util.Vector;
-
 public class Avaliacao {
 
-  private int id;
+    private int id;
+    private int rating;
+    private String desc;
+    private Filme filme;
+    private Usuario usr;
 
-  private int rating;
+    public Avaliacao(int rating, String desc) {
+        this.rating = rating;
+        this.desc = desc;
+    }
 
-  private String desc;
+    
+    public int getId() {
+        return id;
+    }
 
-  public void adicionarComentario(Comentario com) {
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public Comentario removerComentario(int id) {
-  return null;
-  }
+    public int getRating() {
+        return rating;
+    }
 
-  public List<Comentario> listarComentario() {
-  return null;
-  }
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Filme getFilme() {
+        return filme;
+    }
+
+    public void setFilme(Filme filme) {
+        this.filme = filme;
+    }
+
+    public Usuario getUsr() {
+        return usr;
+    }
+
+    public void setUsr(Usuario usr) {
+        this.usr = usr;
+    }
+
+    
+    
 }

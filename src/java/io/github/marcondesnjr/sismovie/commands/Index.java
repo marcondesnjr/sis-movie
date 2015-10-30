@@ -8,8 +8,6 @@ package io.github.marcondesnjr.sismovie.commands;
 import io.github.marcondesnjr.sismovie.SisMovie;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,9 +21,9 @@ public class Index implements Command{
       public String execute (HttpServletRequest request, HttpServletResponse response){
         try {
             request.setAttribute("filmes", SisMovie.lastFilmes());
-            return "pages/index.jsp";
+            return "index";
         } catch (PersistenceException | SQLException ex) {
-            return null;
+            return ErrorPages.PERSISTENCE_ERROR.getPAGE();
         }
     }
 

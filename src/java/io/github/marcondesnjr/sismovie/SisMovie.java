@@ -13,8 +13,9 @@ import java.util.List;
 
 public class SisMovie {
     
-    public static void cadastrarUsuario(String foto, String nome, String sobrenome, String email, String senha, LocalDate dataNasc, String cidade, Estado estado) throws PersistenceException, AlreadyExistsException {
-        Usuario usr = new Usuario(nome, sobrenome, email, senha, dataNasc, cidade, estado);
+    public static void cadastrarUsuario(String foto, String nome, String sobrenome, String email, String senha,
+            LocalDate dataNasc, String cidade, Estado estado, Permissao per) throws PersistenceException, AlreadyExistsException {
+        Usuario usr = new Usuario(nome, sobrenome, email, senha, dataNasc, cidade, estado, per);
         usr.setFoto(foto);
         GerenciadorUsuario.salvar(usr);
     }
@@ -36,21 +37,10 @@ public class SisMovie {
     public void realizarLogoff(){
     }
     
-    public static void cadastrarAdministrador(Administrador resp, Administrador novo) throws NotAdministradorException, PersistenceException, AlreadyExistsException{
-        resp.criarAdministrador(novo);
-    }
 
     public void cadastrarGrupo() {
     }
     
-    public static void cadastrarFilme(Administrador adm, String foto, String titulo, String sinopse, String ano,
-            List<String> gen, List<String> at, List<String> dr) throws PersistenceException{
-            Filme fl = new Filme(foto, titulo, sinopse, Year.of(Integer.parseInt(ano)));
-            fl.setAtores(at);
-            fl.setGeneros(gen);
-            fl.setDiretores(dr);
-            adm.adicionarFilme(fl);
-    }
     
     public static List<Filme> lastFilmes() throws SQLException, PersistenceException{
         return GerenciadorFilme.lastFilmes(10);

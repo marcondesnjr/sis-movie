@@ -1,6 +1,6 @@
 package io.github.marcondesnjr.sismovie.commands;
 
-import io.github.marcondesnjr.sismovie.Administrador;
+import io.github.marcondesnjr.sismovie.Permissao;
 import io.github.marcondesnjr.sismovie.SisMovie;
 import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
@@ -22,7 +22,7 @@ public class LogIn implements Command{
         try {
             Usuario usrLog = SisMovie.realizarLogin(login, senha);
             request.getSession().setAttribute("usrLog", usrLog);
-            if(usrLog instanceof Administrador)
+            if(usrLog.getPermissao() == Permissao.ADMINISTRADOR)
                 request.getSession().setAttribute("adm", 1);
             response.sendRedirect("control?command=Index");
             return null;

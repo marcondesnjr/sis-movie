@@ -11,4 +11,6 @@ public interface DAOEstado extends AutoCloseable{
     public void persistir(String estado) throws PersistenceException;
     public void excluir(String estado) throws PersistenceException;
     public List<Estado> todosEstados() throws PersistenceException;
+    @Override
+    public void close();
 }

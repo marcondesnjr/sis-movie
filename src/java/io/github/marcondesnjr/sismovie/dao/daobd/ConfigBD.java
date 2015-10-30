@@ -24,10 +24,9 @@ public class ConfigBD {
             ds.setUsername(NOME);
             ds.setPassword(SENHA);
             ds.setDefaultAutoCommit(false);
-            return ds;
+            ds.setMaxTotal(5);
         }
-        else
-            return ds;
+        return ds;
     }
     
     public static void destroyDataSource(){

@@ -1,7 +1,7 @@
 package io.github.marcondesnjr.sismovie.dao.daobd;
 
-import io.github.marcondesnjr.sismovie.Administrador;
 import io.github.marcondesnjr.sismovie.Estado;
+import io.github.marcondesnjr.sismovie.Permissao;
 import io.github.marcondesnjr.sismovie.Solicitacao;
 import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.DAOAmizade;
@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -112,14 +114,8 @@ public class DAOBDAmizade implements DAOAmizade{
                     String foto = rs.getString("foto");
                     String cidade = rs.getString("cidade");
                     Estado estado = Estado.valueOf(rs.getString("estado"));
-                    int adm = rs.getInt("adm");
-                    Usuario usr;
-                    if(adm == 1){
-                        usr = new Administrador(nome, sobrenome, email, null, dataNasc, cidade, estado);
-                    }
-                    else{
-                        usr = new Usuario(nome, sobrenome, email, null, dataNasc, cidade, estado);
-                    }
+                    Permissao per = Permissao.valueOf(rs.getString("permissao"));
+                    Usuario usr = new Usuario(nome, sobrenome, email, null, dataNasc, cidade, estado,per);
                     usr.setFoto(foto);
                     usr.setApelido(apelido);
                     usrs.add(usr);
@@ -156,8 +152,12 @@ public class DAOBDAmizade implements DAOAmizade{
     }
 
     @Override
-    public void close() throws Exception {
-        conn.close();
+    public void close(){
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBDAmizade.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

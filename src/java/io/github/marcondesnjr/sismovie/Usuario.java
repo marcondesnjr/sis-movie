@@ -2,6 +2,7 @@ package io.github.marcondesnjr.sismovie;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,10 +17,11 @@ public class Usuario{
     private String cidade;
     private Estado estado;
     private String foto;
-    private List<Solicitacao> amizades;
+    private Permissao permissao;
+    private List<Grupo> grupos;
 
     public Usuario(String nome, String sobrenome, String email, String senha,
-            LocalDate dataNasc, String cidade, Estado estado) {
+            LocalDate dataNasc, String cidade, Estado estado, Permissao per) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -27,7 +29,8 @@ public class Usuario{
         this.dataNasc = dataNasc;
         this.cidade = cidade;
         this.estado = estado;
-        this.amizades = new ArrayList<>();
+        this.permissao = per;
+        this.grupos = new ArrayList<>();
     }
 
     public String getNome() {
@@ -102,6 +105,25 @@ public class Usuario{
         this.foto = foto;
     }
 
+    public Permissao getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(Permissao permissao) {
+        this.permissao = permissao;
+    }
+
+    public List<Grupo> getGrupos() {
+        return Collections.unmodifiableList(grupos);
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+    
+    
+    
+
 
     @Override
     public int hashCode() {
@@ -123,18 +145,6 @@ public class Usuario{
             return false;
         }
         return true;
-    }
-    
-    public void addSolicitacao(Solicitacao sol){
-        amizades.add(sol);
-    }
-
-    public List<Solicitacao> getAmizades() {
-        return amizades;
-    }
-        
-    public void aceitarSolicitacao(Solicitacao sol){
-        sol.setStatus(sol.ACEITO);
     }
     
 }

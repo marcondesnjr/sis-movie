@@ -37,7 +37,7 @@
                                 <figcaption>
                                     <h3>${filme.titulo}</h3>
                                     <span>${filme.sinopse}</span>
-                                    <a class="example-image-link" href="images/c1.jpg" data-lightbox="example-1" data-title="Interior Design">VIEW</a>
+                                    <a class="example-image-link" href="control?command=InitExbFilme&id=${filme.id}" data-lightbox="example-1" data-title="Interior Design">Ver</a>
                                 </figcaption>
                             </figure>
                         </div>
