@@ -32,6 +32,10 @@ public class Usuario{
         this.permissao = per;
         this.grupos = new ArrayList<>();
     }
+    
+    public void addGrupo(Grupo gp){
+        this.grupos.add(gp);
+    }
 
     public String getNome() {
         return nome;

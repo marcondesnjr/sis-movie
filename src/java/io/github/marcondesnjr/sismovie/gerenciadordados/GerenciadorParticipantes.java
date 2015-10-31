@@ -23,4 +23,10 @@ public class GerenciadorParticipantes {
             return dao.carregarParticipantes(gp);
         }
     }
+    
+    public static void salvar(Grupo gp, Usuario usr) throws PersistenceException{
+        try(DAOParticipante dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDAOParticipante()){
+            dao.persiste(gp, usr);
+        }
+    }
 }

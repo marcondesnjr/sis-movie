@@ -2,8 +2,24 @@
     <div class="row">
         <%-- Coluna de tópicos --%>
         <div class="col-md-9">
-
-        </div>
+            <div class="row">
+                <div class="col-md-11">
+                    <h2>${grupo.nome} </h2>
+                </div>
+                <div class="col-md-1">
+                    <c:if test="${not participante}">
+                        <a href="control?command=ParticiparGrupo&id=${grupo.id}">
+                            <img src alt="Participar do Grupo">
+                        </a>
+                    </c:if>
+                </div>
+                
+            </div>
+            <div class="row">
+                <p>${grupo.descricao}</p>
+            </div>
+        
+    </div>
         <%-- Coluna de participantes --%>
         <div class="col-md-3">
             <div class="row">

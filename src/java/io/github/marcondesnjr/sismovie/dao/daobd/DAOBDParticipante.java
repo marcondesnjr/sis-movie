@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -70,7 +68,20 @@ public class DAOBDParticipante implements DAOParticipante {
 
     @Override
     public void persiste(Grupo gp, Usuario usr) throws PersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO grupo_participante(grupo_id, usr_email) VALUES (?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, gp.getId());
+            ps.setString(2, usr.getEmail());
+            ps.executeUpdate();
+            conn.commit();
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
+        }
     }
 
     private List<Grupo> multiHandlerGp(ResultSet rs, Usuario usr) throws SQLException {

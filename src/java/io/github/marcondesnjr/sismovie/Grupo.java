@@ -23,6 +23,7 @@ public class Grupo {
 
 
     public void adicionarParticipante(Usuario usr) {
+        participantes.add(usr);
     }
 
     public Usuario removerParticipante(String email) {
