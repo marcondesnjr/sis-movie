@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-10">
                 <h4><a href="control?command=ExbTopico&tpid=${tpc.id}">${tpc.titulo}</a></h4>
-                <p>${tpc.comentario}}</p>
+                <p>${tpc.comentario}</p>
             </div>
             <div class="col-md-1">
                 <img src="${tpc.filme.foto}" alt="Foto Usuário">

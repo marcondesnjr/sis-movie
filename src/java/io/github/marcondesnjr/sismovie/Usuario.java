@@ -19,6 +19,7 @@ public class Usuario{
     private String foto;
     private Permissao permissao;
     private List<Grupo> grupos;
+    private List<Recomendacao> recomendacoes;
 
     public Usuario(String nome, String sobrenome, String email, String senha,
             LocalDate dataNasc, String cidade, Estado estado, Permissao per) {
@@ -31,6 +32,21 @@ public class Usuario{
         this.estado = estado;
         this.permissao = per;
         this.grupos = new ArrayList<>();
+        this.recomendacoes = new ArrayList<>();
+    }
+
+    public List<Recomendacao> getRecomendacoes() {
+        return recomendacoes;
+    }
+
+    public void setRecomendacoes(List<Recomendacao> recomendacoes) {
+        this.recomendacoes = recomendacoes;
+    }
+    
+    
+    
+    public void addRecomendacao(Recomendacao re){
+        this.recomendacoes.add(re);
     }
     
     public void addGrupo(Grupo gp){

@@ -1,3 +1,27 @@
+<div class="modal fade" id="rec">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Recomende Este Filme</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="control?command=AddRecomendacao" method="POST">
+                    <input type="hidden" value="${filme.id}" name="idFilme" id="idFilme">
+                    <input type="hidden" value="" name="dest" id="dest">
+                    <c:forEach items="${amigos}" var="amigo">
+                        <div class="col-sm-3">
+                            <a href="#" onclick="setFormValue('dest','${amigo.email}')"><img src="${amigo.foto}"></a>
+                        </div>
+                    </c:forEach> 
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="modal fade" id="alv">
     <div class="modal-dialog">
         <div class="modal-content" style="padding: 10px">
@@ -32,6 +56,7 @@
                 <img id="foto-perfil" src="${filme.foto}" alt="Foto do Filme">
                 <span>Rating: ${media}</span>
                 <a href="#" data-toggle="modal" data-target="#alv"><img src alt="AvaliarFilme"></a>
+                <a href="#" data-toggle="modal" data-target="#rec"><img src alt="Recomendar Filme"></a>
             </div>
         </div>
         <%-- Coluna da direita --%>

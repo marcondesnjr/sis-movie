@@ -10,6 +10,7 @@ import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorGrupo;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorParticipantes;
+import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorRecomandacao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +28,10 @@ public class Home implements Command{
             new LoadEstados().execute(request, response);
             Usuario usr = (Usuario) request.getSession().getAttribute("usrLog");
             usr = GerenciadorParticipantes.carregarGrupos(usr);
+            usr = GerenciadorRecomandacao.carregarRecomendacoes(usr);
             request.setAttribute("solicitacoes", Amizade.getSolicitacoesRecebidas(usr));
             request.setAttribute("usuarios", Amizade.getAmigos(usr));
+            request.setAttribute("recomendacoes", usr.getRecomendacoes());
             return "pages/home.jsp";
         } catch (PersistenceException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,null,ex);

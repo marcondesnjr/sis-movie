@@ -3,9 +3,11 @@ package io.github.marcondesnjr.sismovie.commands;
 
 import io.github.marcondesnjr.sismovie.Avaliacao;
 import io.github.marcondesnjr.sismovie.Filme;
+import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorAvaliacao;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorFilme;
+import io.github.marcondesnjr.sismovie.gerenciadordados.GerencidadorAmizade;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +31,10 @@ public class InitExbFilme implements Command{
             request.setAttribute("media", String.format("%.2f", media));
             List<Avaliacao> avls = GerenciadorAvaliacao.carregarAvaliacoes(fm);
             request.setAttribute("avaliacoes", avls);
+            Usuario usr = (Usuario) request.getSession().getAttribute("usrLog");
+            if(usr != null){
+                request.setAttribute("amigos", GerencidadorAmizade.localizarAmigos(usr));
+            }
             return "exibir-filme";
         } catch (PersistenceException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

@@ -4,8 +4,8 @@ $(document).ready(function(){
 });
 
 
-    function setFilmeTopico(e){
-        $("#filme-ref").val(e);
+    function setFormValue(id,val){
+        $('#'+id).val(val);
     }
 
 

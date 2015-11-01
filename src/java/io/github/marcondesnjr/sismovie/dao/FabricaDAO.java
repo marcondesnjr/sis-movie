@@ -21,4 +21,6 @@ public interface FabricaDAO {
     public DAOTopico criarDAOTopico();
     
     public DAOComentario criarDAOComentario();
+    
+    public DAORecomendacao criarDAORecomendacao();
 }

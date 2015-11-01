@@ -21,7 +21,7 @@
                         <div class="row">
                             <c:forEach items="${filmes}" var="filme">
                                 <div class="col-sm-3">
-                                    <a href="#" onclick="setFilmeTopico(${filme.id})"><img src="${filme.foto}"></a>
+                                    <a href="#" onclick="setFormValue('filme-ref',${filme.id})"><img src="${filme.foto}"></a>
                                 </div>
                             </c:forEach> 
                         </div>

@@ -85,12 +85,25 @@
         <div class="col-lg-4">
             <%-- Linha de solicitacoes--%>
             <div class="row">
-                <h2>Solicitações</h2>
+                <h2>Notificações</h2>
                 <c:forEach items="${solicitacoes}" var="sol">
                     <div class="col-md-12">
                         <span>${sol.remetente.nome}</span>
                         <a href="control?command=AceitarSolicitacao&email=${sol.remetente.email}">Aceitar</a>
                         <a href="control?command=RejeitarSolicitacao&email=${sol.remetente.email}">Rejeitar</a>
+                    </div>
+                </c:forEach>
+                <c:forEach items="${recomendacoes}" var="rec">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <a href="control?command=ExibirUsuario&email${rec.rem.email}"> <img src="${rec.rem.foto}"></a>
+                        </div>
+                        <div class="col-md-8">
+                            <h5><a href="control?command=InitExbFilme&id=${rec.filme.id}">${rec.filme.titulo}</a></h5>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="${rec.filme.foto}">
+                        </div>
                     </div>
                 </c:forEach>
             </div>

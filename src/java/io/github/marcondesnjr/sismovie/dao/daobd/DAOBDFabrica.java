@@ -10,6 +10,7 @@ import io.github.marcondesnjr.sismovie.dao.FabricaDAO;
 import io.github.marcondesnjr.sismovie.dao.DAOFilme;
 import io.github.marcondesnjr.sismovie.dao.DAOGrupo;
 import io.github.marcondesnjr.sismovie.dao.DAOParticipante;
+import io.github.marcondesnjr.sismovie.dao.DAORecomendacao;
 import io.github.marcondesnjr.sismovie.dao.DAOTopico;
 import io.github.marcondesnjr.sismovie.dao.DAOUsuario;
 import java.sql.Connection;
@@ -74,6 +75,11 @@ public class DAOBDFabrica implements FabricaDAO{
     @Override
     public DAOComentario criarDAOComentario() {
         return new DAOBDComentario(conn);
+    }
+
+    @Override
+    public DAORecomendacao criarDAORecomendacao() {
+        return new DAOBDRecomendacao(conn);
     }
     
     
