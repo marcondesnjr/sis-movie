@@ -21,7 +21,10 @@ public class Grupo {
         this.topicos = new ArrayList<>();
     }
 
-
+    public void addTopico(Topico tp){
+        this.topicos.add(tp);
+    }
+    
     public void adicionarParticipante(Usuario usr) {
         participantes.add(usr);
     }
@@ -68,6 +71,14 @@ public class Grupo {
 
     public void setParticipantes(List<Usuario> participantes) {
         this.participantes = participantes;
+    }
+
+    public List<Topico> getTopicos() {
+         return Collections.unmodifiableList(topicos);
+    }
+
+    public void setTopicos(List<Topico> topicos) {
+        this.topicos = topicos;
     }
 
     

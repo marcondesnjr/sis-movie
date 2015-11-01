@@ -17,14 +17,13 @@ public class ConfigBD {
     private static BasicDataSource ds;
     
     public static DataSource ConfigurarDataSource(){
-        if(ds == null){
+        if(ds == null || ds.isClosed()){
             ds = new BasicDataSource();
             ds.setDriverClassName("org.postgresql.Driver");
             ds.setUrl(URL);
             ds.setUsername(NOME);
             ds.setPassword(SENHA);
             ds.setDefaultAutoCommit(false);
-            ds.setMaxTotal(5);
         }
         return ds;
     }

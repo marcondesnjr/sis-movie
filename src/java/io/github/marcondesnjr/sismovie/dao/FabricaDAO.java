@@ -17,4 +17,8 @@ public interface FabricaDAO {
     public DAOGrupo criarDAOGrupo();
     
     public DAOParticipante criarDAOParticipante();
+    
+    public DAOTopico criarDAOTopico();
+    
+    public DAOComentario criarDAOComentario();
 }

@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class DAOBDFilme implements DAOFilme {
 
+   
     private Connection conn;
 
     public DAOBDFilme(Connection conn) {
@@ -150,6 +151,11 @@ public class DAOBDFilme implements DAOFilme {
                 throw new PersistenceException("Erro ao tentar realizar ROLLBACK",ex1);
             }
         }
+    }
+
+    @Override
+    public List<Filme> localizar(String ord, String gen, String ator, String diretor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class DAOBDGeneroFilme {

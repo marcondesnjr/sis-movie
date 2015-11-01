@@ -2733,3 +2733,11 @@ ul.contact_info span {
 		left: 37.5%;
 	}
 }
+
+img{
+    max-width: 100%;
+}
+
+.row{
+    margin-bottom: 5px;
+}
