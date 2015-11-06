@@ -53,8 +53,20 @@ public class DAOBDUsuario implements DAOUsuario {
 
 
     @Override
-    public Usuario excluir(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void excluir(Usuario usuario) throws PersistenceException{
+        String sql = "DELETE FROM USUARIO WHERE email = ?";
+        try(PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setString(1, usuario.getEmail());
+            ps.executeUpdate();
+            conn.commit();
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
+        }
     }
 
     @Override
@@ -155,6 +167,12 @@ public class DAOBDUsuario implements DAOUsuario {
         } catch (SQLException ex) {
             Logger.getLogger(DAOBDUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void editar(Usuario usuario) throws PersistenceException {
+        String sql = "UPDATE usuario SET senha=?, nome=?, sobrenome=?, apelido=?, foto=?, dt_nasc=?,cidade=?, estado=?, permissao=?"
+                + " WHERE email = ?";
     }
     
 

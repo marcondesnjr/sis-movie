@@ -1,6 +1,7 @@
 package io.github.marcondesnjr.sismovie.commands;
 
 import io.github.marcondesnjr.sismovie.Filme;
+import io.github.marcondesnjr.sismovie.Genero;
 import io.github.marcondesnjr.sismovie.dao.PhotoUpload;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorFilme;
 import java.io.File;
@@ -53,7 +54,7 @@ public class CadastrarFilme implements Command {
             List<FileItem> items = upload.parseRequest(createRequestContext(request));
             File uploadedFile = null;
             Map<String,String> param = new HashMap<>();
-            List<String> generos = new ArrayList<>();
+            List<Genero> generos = new ArrayList<>();
             List<String> atores = new ArrayList<>();
             List<String> diretores = new ArrayList<>();
             for (FileItem item : items) {
@@ -71,7 +72,7 @@ public class CadastrarFilme implements Command {
                     String nome = item.getFieldName();
                     String val = item.getString();
                     if (nome.equals("genero"))
-                        generos.add(val);
+                        generos.add(Genero.valueOf(val));
                     else if(nome.equals("ator"))
                         atores.add(val);
                     else if(nome.equals("diretor"))
@@ -84,17 +85,17 @@ public class CadastrarFilme implements Command {
             String titulo = param.get("titulo");
             String sinopse = param.get("sinopse");
             String ano = param.get("ano");
-            String foto = uploadedFile != null? DIRETORY + File.separator + uploadedFile.getName(): null;
+            String foto = uploadedFile != null? DIRETORY + "/" + uploadedFile.getName(): null;
             Filme filme = new Filme(foto, titulo, sinopse, Year.parse(ano));
             filme.setAtores(atores);
             filme.setDiretores(diretores);
             filme.setGeneros(generos);
             GerenciadorFilme.salvar(filme);
-            response.sendRedirect("control?command=exibirFilme&id="+filme.getId());
+            response.sendRedirect("control?command=InitExbFilme&id="+filme.getId());
             return null;
         } catch (Exception ex) {
             Logger.getLogger(PhotoUpload.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            return "persistenceError";
         }
     }
 

@@ -16,7 +16,7 @@ public interface DAOFilme extends AutoCloseable{
     public void localizarGen (String genero) throws PersistenceException;
     public void update(Filme fl) throws PersistenceException;
     public List<Filme> localizarUltimos(int num) throws PersistenceException;
-    public List<Filme> localizar(String ord, String gen, String ator, String diretor);
+    public List<Filme> localizar(String ord, String gen, String ator, String diretor, String titulo, boolean desc) throws PersistenceException;
     @Override
     public void close();
 }

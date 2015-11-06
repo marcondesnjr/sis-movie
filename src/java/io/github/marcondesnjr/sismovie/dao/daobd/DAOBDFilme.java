@@ -1,6 +1,7 @@
 package io.github.marcondesnjr.sismovie.dao.daobd;
 
 import io.github.marcondesnjr.sismovie.Filme;
+import io.github.marcondesnjr.sismovie.Genero;
 import io.github.marcondesnjr.sismovie.dao.DAOFilme;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import java.sql.Connection;
@@ -18,7 +19,10 @@ import java.util.logging.Logger;
  */
 public class DAOBDFilme implements DAOFilme {
 
-   
+    public static final String ORDER_BY_RATING = "rating";
+    public static final String ORDER_BY_ANO = "ano";
+    public static final String ORDER_BY_TITULO = "titulo";
+    
     private Connection conn;
 
     public DAOBDFilme(Connection conn) {
@@ -40,8 +44,8 @@ public class DAOBDFilme implements DAOFilme {
                 }
             }
             DAOBDGeneroFilme daoGen = new DAOBDGeneroFilme(conn);
-            for (String gen : fl.getGeneros()) {
-                daoGen.persistir(fl, gen);
+            for (Genero gen : fl.getGeneros()) {
+                daoGen.persistir(fl, gen.name());
             }
             DAOBDAtor daoAt = new DAOBDAtor(conn);
             for (String ator : fl.getAtores()) {
@@ -114,9 +118,7 @@ public class DAOBDFilme implements DAOFilme {
     public void close(){
         try {
             conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBDFilme.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (SQLException ex) {}
     }
 
     @Override
@@ -154,8 +156,54 @@ public class DAOBDFilme implements DAOFilme {
     }
 
     @Override
-    public List<Filme> localizar(String ord, String gen, String ator, String diretor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Filme> localizar(String ord, String gen, String ator, String diretor, String tit, boolean desc) throws PersistenceException{
+        StringBuilder builder = new StringBuilder("SELECT DISTINCT id,foto,titulo,sinopse,ano, avl_media(id) rating FROM FILME JOIN GENERO_FILME GF ON id = GF.id_filme "
+                + "JOIN ATOR_FILME AT ON id = AT.id_filme JOIN DIRETOR_FILME D ON id = D.id_filme WHERE '1'='1'");
+        if(gen != null)
+            builder.append(" AND genero = ? ");
+        if(ator != null)
+            builder.append(" AND ator ILIKE ? ");
+        if(diretor != null)
+            builder.append(" AND diretor ILIKE ? ");
+        if(tit != null){
+            builder.append(" AND titulo ILIKE ? ");
+            if(desc)
+                builder.append(" DESC");
+        }
+        builder.append(" ORDER BY ").append(ord);
+        String sql = builder.toString();
+        
+        try(PreparedStatement ps = conn.prepareStatement(sql)){
+            int cont = 1;
+            if(gen != null)
+                ps.setString(cont++, gen);
+            if(ator != null)
+                ps.setString(cont++, "%"+ator+"%");
+            if(diretor != null)
+                ps.setString(cont++, "%"+diretor+"%");
+             if(tit != null)
+                ps.setString(cont++, "%"+tit+"%");
+            try(ResultSet rs = ps.executeQuery()){
+                List<Filme> list = new ArrayList<>();
+                while(rs.next()){
+                    String foto = rs.getString("foto");
+                    String titulo = rs.getString("titulo");
+                    String sinopse = rs.getString("sinopse");
+                    Year ano = Year.parse(rs.getString("ano"));
+                    Filme fm = new Filme(foto, titulo, sinopse, ano);
+                    fm.setId(rs.getInt("id"));
+                    list.add(fm);
+                }
+                return list;
+            }
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
+        }
     }
 
     private class DAOBDGeneroFilme {
@@ -174,16 +222,16 @@ public class DAOBDFilme implements DAOFilme {
             }
         }
         
-        public List<String> localizarGeneroFilme(Filme fl) throws SQLException{
+        public List<Genero> localizarGeneroFilme(Filme fl) throws SQLException{
             String sql = "SELECT genero "
                     + "FROM GENERO_FILME "
                     + "WHERE id_filme = ?";
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setInt(1, fl.getId());
-                List<String> generos = new ArrayList<>();
+                List<Genero> generos = new ArrayList<>();
                 try(ResultSet rs = ps.executeQuery()){
                     if(rs.next()){
-                        generos.add(rs.getString("genero"));
+                        generos.add(Genero.valueOf(rs.getString("genero")));
                     }
                     return generos;
                 }

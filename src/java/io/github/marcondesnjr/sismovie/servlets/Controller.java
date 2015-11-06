@@ -32,6 +32,14 @@ public class Controller extends HttpServlet {
         try {
 
             String commandName = request.getParameter("command");
+            if(request.getSession().getAttribute("usrLog") == null){
+                if(!(commandName.matches("^Index$") || commandName.matches("^SingInPage") || commandName.matches("^LogIn")
+                        || commandName.matches("^InitExbFilme") || commandName.matches("^ExbBuscaFilme")
+                        || commandName.matches("^BuscaFilme"))){
+                    response.sendRedirect("control?command=Index");
+                    return;
+                }
+            }
             Command instance = (Command) Class.forName("io.github.marcondesnjr.sismovie.commands."+commandName).newInstance();
             String resp = instance.execute(request, response);
             if(resp != null)

@@ -12,6 +12,10 @@ import java.util.List;
  */
 public class GerenciadorFilme {
 
+    public static final String ORDER_BY_RATING = "rating";
+    public static final String ORDER_BY_ANO = "ano";
+    public static final String ORDER_BY_TITULO = "titulo";
+    
     public static List<Filme> lastFilmes(int n) throws PersistenceException {
         try (DAOFilme dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDaoFilme();) {
             List<Filme> filmes = dao.localizarUltimos(10);
@@ -29,6 +33,11 @@ public class GerenciadorFilme {
         try (DAOFilme dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDaoFilme();) {
             Filme fm = dao.localizar(id);
             return fm;
+        }
+    }
+    public static List<Filme> localizar(String ord, String gen, String ator, String diretor,String titulo, boolean desc) throws PersistenceException{
+        try (DAOFilme dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDaoFilme();) {
+            return dao.localizar(ord, gen, ator, diretor, titulo, desc);
         }
     }
 

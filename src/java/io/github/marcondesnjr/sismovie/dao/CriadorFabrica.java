@@ -17,7 +17,7 @@ public class CriadorFabrica {
         switch (tipo) {
             case 0: {
                 try {
-                    return new DAOBDFabrica(ConfigBD.ConfigurarDataSource().getConnection());
+                    return new DAOBDFabrica(ConnectionManager.getConnection());
                 } catch (SQLException ex) {
                     throw new PersistenceException(ex); 
                 }

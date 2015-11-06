@@ -20,18 +20,22 @@
                 </div>
                 <div class="form-group">
                     <label for="genero">Gerero</label><br>
-                    <input class="form-control" type="text" name="genero" id="genero">
-                    <a href="#" onclick="addGenero()"><input type="button" value="MORE"></a><br>
+                    <select name="genero" id="genero">
+                        <c:forEach items="${generos}" var="gen">
+                            <option selected value="${gen.name}">${gen}</option>
+                        </c:forEach>
+                    </select>
+                    <a href="#" class="preventDefault" onclick="addGenero(this)"><input type="button" value="MORE"></a><br>
                 </div>
                 <div class="form-group">
                     <label for="ator">Atores</label><br>
                     <input type="text" name="ator" id="ator">
-                    <a href="#" onclick="addAtor()"><input type="button" value="MORE"></a><br>
+                    <a href="#" class="preventDefault" onclick="addAtor(this)"><input type="button" value="MORE"></a><br>
                 </div>
                 <div class="form-group">
                     <label for="diretor">Diretores</label><br>
                     <input type="text" name="diretor" id="diretor">
-                    <a href="#" onclick="addDiretor()"><input type="button" value="MORE"></a><br>
+                    <a href="#" class="preventDefault" onclick="addDiretor(this)"><input type="button" value="MORE"></a><br>
                 </div>
                 <div class="form-group">
                     <label for="cidade">Digite sua cidade</label><br>

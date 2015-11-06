@@ -12,7 +12,7 @@ public class Filme {
     private String titulo;
     private String sinopse;
     private Year ano;
-    private List<String> generos;
+    private List<Genero> generos;
     private List<String> atores;
     private List<String> diretores;
 
@@ -66,11 +66,11 @@ public class Filme {
         this.id = id;
     }
 
-    public List<String> getGeneros() {
+    public List<Genero> getGeneros() {
         return Collections.unmodifiableList(generos);
     }
 
-    public void addGeneros(String gen) {
+    public void addGeneros(Genero gen) {
         generos.add(gen);
     }
 
@@ -90,7 +90,7 @@ public class Filme {
         diretores.add(diretor);
     }
 
-    public void setGeneros(List<String> generos) {
+    public void setGeneros(List<Genero> generos) {
         this.generos = generos;
     }
 

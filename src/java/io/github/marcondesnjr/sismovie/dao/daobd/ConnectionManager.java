@@ -3,6 +3,8 @@ package io.github.marcondesnjr.sismovie.dao.daobd;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +27,12 @@ public class ConnectionManager {
         Connection conn = DriverManager.getConnection(URL,NOME,SENHA);
         conn.setAutoCommit(false);
         return conn;
+    }
+    
+    public static void main(String[] args) {
+        Map map = new HashMap();
+        map.put("objeto", new Object());
+        map.get("objeto");
     }
     
 }

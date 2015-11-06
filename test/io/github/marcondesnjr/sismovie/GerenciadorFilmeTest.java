@@ -7,6 +7,7 @@ package io.github.marcondesnjr.sismovie;
 
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorFilme;
 import java.time.Year;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +32,6 @@ public class GerenciadorFilmeTest {
 
     @Test
     public void testLastFilmes() throws Exception {
-        Filme fl = new Filme(null, "titulo", "sinopse", Year.now());
-        GerenciadorFilme.salvar(fl);
     }
     
 }

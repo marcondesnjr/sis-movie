@@ -1,5 +1,6 @@
 package io.github.marcondesnjr.sismovie.commands;
 
+import io.github.marcondesnjr.sismovie.Genero;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +13,8 @@ public class InitCadastrarFilme implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-        return "pages/cadastrar-filme.jsp";
+        request.setAttribute("generos", Genero.values());
+        return "pages/cadastrar-filme.jsp"; 
     
     }
     
