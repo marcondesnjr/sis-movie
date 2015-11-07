@@ -127,7 +127,7 @@
                 <c:forEach items="${usrLog.grupos}" var="grupo">
                     <div class="col-md-3 col-lg-3">
                         <div class="mini-block">
-                            <a href="control?command=ExbGrupo&id=${grupo.id}"> ${grupo.nome}</a>
+                            <a href="grupo/${grupo.id}"> ${grupo.nome}</a>
                         </div>
                     </div>
                 </c:forEach>

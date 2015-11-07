@@ -33,7 +33,7 @@ public class Controller extends HttpServlet {
 
             String commandName = request.getParameter("command");
             if(request.getSession().getAttribute("usrLog") == null){
-                if(!(commandName.matches("^Index$") || commandName.matches("^SingInPage") || commandName.matches("^LogIn")
+                if(!(commandName.matches("^Index$") || commandName.matches("^SingInPage") || commandName.matches("^SingIn") || commandName.matches("^LogIn")
                         || commandName.matches("^InitExbFilme") || commandName.matches("^ExbBuscaFilme")
                         || commandName.matches("^BuscaFilme"))){
                     response.sendRedirect(request.getContextPath()+"/index/");

@@ -40,8 +40,8 @@
                             <div class="mask1"></div>
                             <div class="mask2"></div>
                             <div class="info">
-                                <h3>${filme.titulo}</h3>
-                                <p>${filme.sinopse}</p>
+                                <h3><c:out value="${filme.titulo}"/></h3>
+                                <p><c:out value="${filme.sinopse}"/></p>
                             </div>
                         </a>
                     </div>

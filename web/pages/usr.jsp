@@ -8,12 +8,12 @@
         </div>
         <div class="col-md-10">
             <div class="panel-usr">
-                <h2>${usuario.nome} ${usuario.sobrenome}</h2>
+                <h2><c:out value="${usuario.nome} ${usuario.sobrenome}"/></h2>
                 <ul>
-                    <li>Email: ${usuario.email}</li>
-                    <li>Data de Nascimento: ${usuario.dataNasc}</li>
-                    <li>Cidade: ${usuario.cidade}</li>
-                    <li>Estado: ${usuario.estado}</li>
+                    <li>Email: <c:out value="${usuario.email}"/></li>
+                    <li>Data de Nascimento: <c:out value="${usuario.dataNasc}"/></li>
+                    <li>Cidade: <c:out value="${usuario.cidade}"/></li>
+                    <li>Estado: <c:out value="${usuario.estado}"/></li>
                 </ul>
             </div>
         </div>

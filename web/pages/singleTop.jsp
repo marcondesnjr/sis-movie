@@ -5,8 +5,8 @@
             <c:out value="${topico.criador.nome}"/>
         </div>
         <div class="col-md-10">
-            <h4><a href="#">${topico.titulo}</a></h4>
-            <p>${topico.comentario}}</p>
+            <h4><a href="#"><c:out value="${topico.titulo}"/></a></h4>
+            <p><c:out value="${topico.comentario}}"/></p>
         </div>
         <div class="col-md-1">
             <img src="${topico.filme.foto}" alt="Foto Usuário">

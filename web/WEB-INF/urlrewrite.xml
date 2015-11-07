@@ -78,6 +78,10 @@
        <from>/busca/usuario/</from>
        <to>../../control?command=BuscaUsuario</to>
     </rule>
+    <rule>
+       <from>/grupo/([0-9]+)</from>
+       <to>../control?command=ExbGrupo&amp;id=$1</to>
+    </rule>
     
 
 </urlrewrite>

@@ -64,8 +64,8 @@
         <%-- Coluna da direita --%>
         <div class="col-xs-12 col-sm-9 col-md-9">
             <div class="panel-filme">
-                <h2>${filme.titulo}</h2>
-                <p>${filme.sinopse}</p>
+                <h2><c:out value="${filme.titulo}"/></h2>
+                <p><c:out value="${filme.sinopse}"/></p>
             </div>
 
             <div class="panel-filme" style="margin-top: 50px">
@@ -78,13 +78,13 @@
                             <div class="col-xs-8 col-sm-10">
                                 <div class="row">
                                     <div class="col-xs-10">
-                                        <h4>${avl.usr.nome} ${avl.usr.sobrenome}</h4>
+                                        <h4><c:out value="${avl.usr.nome} ${avl.usr.sobrenome}"/></h4>
                                     </div>
                                     <div class="col-xs-2">
                                         <h5>Rating: ${avl.rating}</h5>
                                     </div> 
                                     <p>
-                                        ${avl.desc}
+                                        <c:out value="${avl.desc}"/>
                                     </p>
                                 </div>
 

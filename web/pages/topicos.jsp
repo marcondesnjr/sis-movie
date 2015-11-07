@@ -5,8 +5,8 @@
                 <a href="control?command=ExibirUsuario&email=${tpc.criador.email}"><img src="${tpc.criador.foto}" alt="Foto Usuário"></a>
             </div>
             <div class="col-md-10">
-                <h4><a href="control?command=ExbTopico&tpid=${tpc.id}">${tpc.titulo}</a></h4>
-                <p>${tpc.comentario}</p>
+                <h4><a href="control?command=ExbTopico&tpid=${tpc.id}"><c:out value="${tpc.titulo}"/></a></h4>
+                <p><c:out value="${tpc.comentario}"/></p>
             </div>
             <div class="col-md-1">
                 <img src="${tpc.filme.foto}" alt="Foto Usuário">
