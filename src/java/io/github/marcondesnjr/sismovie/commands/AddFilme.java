@@ -28,7 +28,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class CadastrarFilme implements Command {
+public class AddFilme implements Command {
 
     private final String DIRETORY = "img_filme";
 

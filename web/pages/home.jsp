@@ -27,7 +27,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-sm-2">
             <img id="pfimg" src="${usrLog.foto}" alt="Imagem de perfil">
             <form>
                 <label for="foto">Mude sua foto</label>
@@ -36,7 +36,7 @@
             </form>
             <a href="#" data-toggle="modal" data-target="#new-group"><img src alt="Criar Novo Grupo"></a>
         </div>
-        <div class="col-lg-6">
+        <div class="col-sm-6">
             <h1>Edite as suas informações</h1>
             <form action="CadastroUsuario" method="post" enctype="multipart/form-data">
                 <div class="form-group">
@@ -82,7 +82,7 @@
             </form>
         </div>
         <%-- Coluna da Direita --%>
-        <div class="col-lg-4">
+        <div class="col-sm-4">
             <%-- Linha de solicitacoes--%>
             <div class="row">
                 <h2>Notificações</h2>
@@ -110,9 +110,11 @@
             <%-- Linha de amigos--%>
             <div class="row">
                 <h2>Amigos</h2>
+            </div>
+            <div class="row">
                 <c:forEach items="${usuarios}" var="usuario">
                     <div class="col-md-3">
-                        <div class="sm-usuario">
+                        <div class="mini-block">
                             <img src="${usuario.foto}" alt="${usuario.nome}">
                             <span><a href="control?command=ExibirUsuario&email=${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
                         </div>
@@ -124,7 +126,7 @@
                 <h2>Grupos</h2>
                 <c:forEach items="${usrLog.grupos}" var="grupo">
                     <div class="col-md-3 col-lg-3">
-                        <div class="sm-usuario">
+                        <div class="mini-block">
                             <a href="control?command=ExbGrupo&id=${grupo.id}"> ${grupo.nome}</a>
                         </div>
                     </div>

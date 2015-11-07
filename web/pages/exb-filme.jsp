@@ -11,7 +11,7 @@
                     <input type="hidden" value="" name="dest" id="dest">
                     <c:forEach items="${amigos}" var="amigo">
                         <div class="col-sm-3">
-                            <a href="#" onclick="setFormValue('dest','${amigo.email}')"><img src="${amigo.foto}"></a>
+                            <a href="#" onclick="setFormValue('dest', '${amigo.email}')"><img src="${amigo.foto}"></a>
                         </div>
                     </c:forEach> 
                     <input type="submit">
@@ -51,38 +51,43 @@
 <div class="container">
     <div class="row">
         <%-- Coluna da esquerda --%> 
-        <div class="col-md-3">
+        <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="panel-filme-left">
-                <img id="foto-perfil" src="${filme.foto}" alt="Foto do Filme">
-                <span>Rating: ${media}</span>
-                <a href="#" data-toggle="modal" data-target="#alv"><img src alt="AvaliarFilme"></a>
-                <a href="#" data-toggle="modal" data-target="#rec"><img src alt="Recomendar Filme"></a>
+                <img class="foto-movie" src="${filme.foto}" alt="Foto do Filme">
+                <div class="info-movie">
+                    <span>Rating: ${media}</span>
+                    <a href="#" data-toggle="modal" data-target="#alv"><img src alt="AvaliarFilme"></a>
+                    <a href="#" data-toggle="modal" data-target="#rec"><img src alt="Recomendar Filme"></a>
+                </div>
             </div>
         </div>
         <%-- Coluna da direita --%>
-        <div class="col-md-9">
+        <div class="col-xs-12 col-sm-9 col-md-9">
             <div class="panel-filme">
                 <h2>${filme.titulo}</h2>
                 <p>${filme.sinopse}</p>
             </div>
-            
+
             <div class="panel-filme" style="margin-top: 50px">
                 <c:forEach items="${avaliacoes}" var="avl">
                     <div class="alv-separpator">
                         <div class="row">
-                            <div class="col-sm-2">
-                                <img class="max-width" src="${avl.usr.foto}" alt="foto do usuário">
+                            <div class="col-xs-4 col-sm-2">
+                                <a href="control?command=ExbirUsuario&email=${avl.usr.email}"><img class="miniature-usr" src="${avl.usr.foto}" alt="foto do usuário"></a>
                             </div>
-                            <div class="col-sm-10">
-                                <div class="col-sm-10">
-                                    <h4>${avl.usr.nome} ${avl.usr.sobrenome}</h4>
+                            <div class="col-xs-8 col-sm-10">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                        <h4>${avl.usr.nome} ${avl.usr.sobrenome}</h4>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <h5>Rating: ${avl.rating}</h5>
+                                    </div> 
+                                    <p>
+                                        ${avl.desc}
+                                    </p>
                                 </div>
-                                <div class="col-sm-2">
-                                    <h5>Rating: ${avl.rating}</h5>
-                                </div> 
-                                <p>
-                                    ${avl.desc}
-                                </p>
+
                             </div>
                         </div>
                     </div>

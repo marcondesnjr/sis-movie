@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class InitExbFilme implements Command{
+public class ExbFilme implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

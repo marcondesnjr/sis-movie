@@ -10,9 +10,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
+        <base href="http://localhost:8080/SisMovieWeb/" />
         <title>Interior Design a interior category Flat bootstrap Responsive Website Template | Home :: w3layouts</title>
         <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
         <link href="css/owl.carousel.css" rel="stylesheet">
+        <link href="css/ihover.min.css" rel='stylesheet' type='text/css' />
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="js/jquery.min.js"></script>
         <script src="js/modernizr.custom.js"></script>
@@ -102,15 +104,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li class="active"><a href="control?command=Index">Home</a></li>
+                                    <li class="active"><a href="index/">Home</a></li>
                                         <c:if test="${usrLog eq null}">
-                                        <li><a href="control?command=SingInPage">Cadastre-se</a></li>
+                                        <li><a href="singin/page">Cadastre-se</a></li>
                                         </c:if>
                                         <c:if test="${usrLog ne null}">
-                                        <li><a href="control?command=Home">Minha conta</a></li>
-                                        <li><a href="control?command=LoadUsuario">Encontre Amigos</a></li>
+                                        <li><a href="home/">Minha conta</a></li>
+                                        <li><a href="busca/usuario/">Encontre Amigos</a></li>
                                         <li><a href="gallery.html">Meus Grupos</a></li>
-                                        <li><a href="control?command=LogOff">Logoff</a></li>
+                                        <li><a href="logoff/">Logoff</a></li>
                                         </c:if>
                                         <c:if test="${adm eq '1'}" >
                                         <li><div class="dropdown">

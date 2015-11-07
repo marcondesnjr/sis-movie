@@ -36,7 +36,7 @@ public class Controller extends HttpServlet {
                 if(!(commandName.matches("^Index$") || commandName.matches("^SingInPage") || commandName.matches("^LogIn")
                         || commandName.matches("^InitExbFilme") || commandName.matches("^ExbBuscaFilme")
                         || commandName.matches("^BuscaFilme"))){
-                    response.sendRedirect("control?command=Index");
+                    response.sendRedirect(request.getContextPath()+"/index/");
                     return;
                 }
             }

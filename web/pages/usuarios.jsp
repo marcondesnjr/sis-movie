@@ -9,7 +9,7 @@
         </form>
         <c:forEach items="${usuarios}" var="usuario">
             <div class="col-lg-1 col-md-2">
-                    <div class="sm-usuario">
+                    <div class="mini-block">
                         <img src="${usuario.foto}" alt="${usuario.nome}">
                         <span><a href="control?command=ExibirUsuario&email=${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
                 </div>

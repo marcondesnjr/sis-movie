@@ -4,7 +4,7 @@
         <div class="container">
             <h2>Conecte-se Com Sua Conta</h2>
             <div class="form-submit">
-                <form  class="center" action="control?command=LogIn" method="post">
+                <form  class="center" action="login/" method="post">
                     <div class="form-group">
                         <label for="login">Email:</label>
                         <input type="text" name="login" id="login"><br>
@@ -22,31 +22,32 @@
 <br><br><br><br><br><br><br>
 <!--latest designs-->
 <div class="exb-filme">
-    <div id="cate" class="categories">
-        <div class="container">
-            <div class="cat-head">
+    <div class="container">
+        <div class="row row-centered">
+            <div class="col-xs-2 col-centered">
                 <h3>Ultimos Filmes</h3>
             </div>
-            <div class="categorie-grids cs-style-1">
-                <div class="row">
-                    <c:forEach items="${filmes}" var="filme">
+        </div>
+        
+        <div class="row row-centered">
+            <c:forEach items="${filmes}" var="filme">
 
-                        <div class="col-md-4 col-sm-6 col-xs-12 cate-grid grid">
-                            <figure>
-                                <img src="${filme.foto}" alt="">
-                                <figcaption>
-                                    <h3>${filme.titulo}</h3>
-                                    <span>${filme.sinopse}</span>
-                                    <a class="example-image-link" href="control?command=InitExbFilme&id=${filme.id}" data-lightbox="example-1" data-title="Interior Design">Ver</a>
-                                </figcaption>
-                            </figure>
-                        </div>
+                <div class="col-md-4 col-xs-8 col-sm-6 col-centered">
 
-                    </c:forEach>
+                    <div class="ih-item square colored effect4">
+                        <a href="control?command=InitExbFilme&id=${filme.id}">
+                            <div class="img"><img src="${filme.foto}" alt="Capa do Filme"></div>
+                            <div class="mask1"></div>
+                            <div class="mask2"></div>
+                            <div class="info">
+                                <h3>${filme.titulo}</h3>
+                                <p>${filme.sinopse}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="clearfix"></div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </div>

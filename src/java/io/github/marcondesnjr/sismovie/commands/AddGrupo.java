@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class CriarGrupo implements Command{
+public class AddGrupo implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -27,10 +27,10 @@ public class CriarGrupo implements Command{
             response.sendRedirect("control?command=ExbGrupo");
             return null;
         } catch (PersistenceException ex) {
-            Logger.getLogger(CriarGrupo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddGrupo.class.getName()).log(Level.SEVERE, null, ex);
             return "persistenceError";
         } catch (IOException ex) {
-            Logger.getLogger(CriarGrupo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddGrupo.class.getName()).log(Level.SEVERE, null, ex);
             return "ioError";
         }
     }

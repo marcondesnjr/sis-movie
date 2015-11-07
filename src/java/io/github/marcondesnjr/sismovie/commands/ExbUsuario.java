@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class ExibirUsuario implements Command{
+public class ExbUsuario implements Command{
 
  
     public String execute(HttpServletRequest request, HttpServletResponse response){

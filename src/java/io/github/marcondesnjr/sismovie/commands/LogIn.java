@@ -24,7 +24,7 @@ public class LogIn implements Command{
             request.getSession().setAttribute("usrLog", usrLog);
             if(usrLog.getPermissao() == Permissao.ADMINISTRADOR)
                 request.getSession().setAttribute("adm", 1);
-            response.sendRedirect("control?command=Index");
+            response.sendRedirect(request.getContextPath()+"/index/");
             return null;
         }
         catch (IOException | SQLException | PersistenceException ex) {

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class LoadUsuario implements Command{
+public class BuscaUsuario implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){

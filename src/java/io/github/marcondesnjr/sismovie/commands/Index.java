@@ -21,7 +21,7 @@ public class Index implements Command{
       public String execute (HttpServletRequest request, HttpServletResponse response){
         try {
             request.setAttribute("filmes", SisMovie.lastFilmes());
-            return "index";
+            return "pages/index.jsp";
         } catch (PersistenceException | SQLException ex) {
             return ErrorPages.PERSISTENCE_ERROR.getPAGE();
         }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class InitCadastrarFilme implements Command{
+public class ExbCadastrarFilme implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
