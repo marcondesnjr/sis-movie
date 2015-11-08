@@ -34,5 +34,5 @@ public class Amizade {
     public static void removerSolicitacão(String rem, String dest) throws PersistenceException{
         GerencidadorAmizade.removerSolicitacao(rem, dest);
     }
-    
+     
 }

@@ -38,20 +38,22 @@
 <div class="container">
     <div class="row">
         <%-- Coluna de tópicos --%>
+        
         <div class="col-md-9">
+            <div class="panel">
             <div class="row">
                 <div class="col-md-11">
                     <h2><c:out value="${grupo.nome}"/> </h2>
                 </div>
                 <div class="col-md-1">
                     <c:if test="${not participante}">
-                        <a href="control?command=ParticiparGrupo&id=${grupo.id}">
-                            <img src alt="Participar do Grupo">
+                        <a href="participar/grupo/${grupo.id}">
+                            <img src="img/user_add.png" alt="Participar do Grupo">
                         </a>
                     </c:if>
                     <c:if test="${participante}">
                         <a href="#" data-toggle="modal" data-target="#new-topic">
-                            <img src alt="Adicionar Tópico">
+                            <img src="img/add.png" alt="Adicionar Tópico">
                         </a>
                     </c:if>
                 </div>  
@@ -59,13 +61,14 @@
             <div class="row">
                 <p><c:out value="${grupo.descricao}"/></p>
             </div>
-                <c:if test="${tpid eq null}" var="result">
+                <c:if test="${tpid eq null and participante}" var="result">
                     <%@include file="topicos.jsp" %>
                 </c:if>
                 <c:if test="${tpid ne null}">
                     <%@include file="singleTop.jsp" %>
                     <%@include file="comentForm.jsp" %>
                 </c:if>
+        </div>
         </div>
         <%-- Coluna de participantes --%>
         <div class="col-md-3">
@@ -80,7 +83,7 @@
                             <div class="col-md-3 mini-block">
                                 <img src="${part.foto}" alt="${part.nome}">
                                 <span>
-                                    <a href="control?command=ExibirUsuario&email=${part.email}">
+                                    <a href="usr/${part.email}">
                                         ${part.nome} ${part.sobrenome}
                                     </a>
                                 </span>

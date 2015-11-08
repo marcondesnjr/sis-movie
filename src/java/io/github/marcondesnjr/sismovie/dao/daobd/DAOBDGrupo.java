@@ -115,4 +115,86 @@ public class DAOBDGrupo implements DAOGrupo {
         }
     }
 
+    @Override
+    public List<Grupo> localizarTodos() throws PersistenceException {
+        String sql = "SELECT * FROM GRUPO JOIN USUARIO ON email = criador";
+        List<Grupo> list = new ArrayList<>();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+                    String nome = rs.getString("nome");
+                    String sobrenome = rs.getString("sobrenome");
+                    String email = rs.getString("email");
+                    String apelido = rs.getString("apelido");
+                    LocalDate dataNasc = rs.getDate("dt_nasc").toLocalDate();
+                    String foto = rs.getString("foto");
+                    String cidade = rs.getString("cidade");
+                    Estado estado = Estado.valueOf(rs.getString("estado"));
+                    Permissao per = Permissao.valueOf(rs.getString("permissao"));
+                    Usuario usuario = new Usuario(nome, sobrenome, email, null, dataNasc, cidade, estado, per);
+                    usuario.setFoto(foto);
+                    usuario.setApelido(apelido);
+
+                    int idGrupo = rs.getInt("id");
+                    String nomeg = rs.getString("nome");
+                    String desc = rs.getString("descricao");
+                    Grupo gp = new Grupo(nomeg, desc, usuario);
+                    gp.setId(idGrupo);
+                    list.add(gp);
+                }
+                conn.commit();
+                return list;
+            }
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
+        }
+    }
+
+    @Override
+    public List<Grupo> localizarPorNome(String nome) throws PersistenceException {
+        String sql = "SELECT * FROM GRUPO G JOIN USUARIO U ON U.email = G.criador WHERE G.nome ILIKE ?";
+        List<Grupo> list = new ArrayList<>();
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, "%"+nome+"%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String nomeUsr = rs.getString("nome");
+                    String sobrenome = rs.getString("sobrenome");
+                    String email = rs.getString("email");
+                    String apelido = rs.getString("apelido");
+                    LocalDate dataNasc = rs.getDate("dt_nasc").toLocalDate();
+                    String foto = rs.getString("foto");
+                    String cidade = rs.getString("cidade");
+                    Estado estado = Estado.valueOf(rs.getString("estado"));
+                    Permissao per = Permissao.valueOf(rs.getString("permissao"));
+                    Usuario usuario = new Usuario(nomeUsr, sobrenome, email, null, dataNasc, cidade, estado, per);
+                    usuario.setFoto(foto);
+                    usuario.setApelido(apelido);
+
+                    int idGrupo = rs.getInt("id");
+                    String nomeg = rs.getString("nome");
+                    String desc = rs.getString("descricao");
+                    Grupo gp = new Grupo(nomeg, desc, usuario);
+                    gp.setId(idGrupo);
+                    list.add(gp);
+                }
+                conn.commit();
+                return list;
+            }
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
+        }
+    }
+
 }

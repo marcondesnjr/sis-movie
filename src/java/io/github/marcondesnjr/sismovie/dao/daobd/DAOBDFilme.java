@@ -123,7 +123,7 @@ public class DAOBDFilme implements DAOFilme {
 
     @Override
     public List<Filme> localizarUltimos(int num) throws PersistenceException {
-        try(PreparedStatement ps = conn.prepareStatement("SELECT * FROM FILME ORDER BY id LIMIT ?")){
+        try(PreparedStatement ps = conn.prepareStatement("SELECT * FROM FILME ORDER BY data_inset DESC LIMIT ?")){
             ps.setInt(1, num);
             try(ResultSet rs = ps.executeQuery()){
                 List<Filme> films = new ArrayList();

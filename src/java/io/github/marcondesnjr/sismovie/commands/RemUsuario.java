@@ -1,7 +1,6 @@
 
 package io.github.marcondesnjr.sismovie.commands;
 
-import io.github.marcondesnjr.sismovie.Amizade;
 import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorUsuario;
@@ -15,21 +14,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author José Marcondes do Nascimento Junior
  */
-public class RejeitarSolicitacao implements Command{
+public class RemUsuario implements Command{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-
         try {
-            String rem = request.getParameter("email");
-            Usuario dest = (Usuario) request.getSession().getAttribute("usrLog");
-            Amizade.removerSolicitacão(rem, dest.getEmail());
-            response.sendRedirect(request.getContextPath()+"/home/");
+            Usuario usr = (Usuario) request.getSession().getAttribute("usrLog");
+            GerenciadorUsuario.excluir(usr.getEmail());
+            response.sendRedirect(request.getContextPath()+"/logoff/");
             return null;
-        } catch (PersistenceException ex) {
-            return ErrorPages.PERSISTENCE_ERROR.getPAGE();
         } catch (IOException ex) {
-            return ErrorPages.NOT_FOUND.getPAGE();
+            Logger.getLogger(RemUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return "ioError";
+        } catch (PersistenceException ex) {
+            Logger.getLogger(RemUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return "persistenceError";
         }
     }
     

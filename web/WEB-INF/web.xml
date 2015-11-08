@@ -25,10 +25,27 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>io.github.marcondesnjr.sismovie.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>controller</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    
     <error-page>
         <error-code>210</error-code>
         <location>/login-usuario.jsp</location>
     </error-page>
+    
+    <error-page>
+        <error-code>40</error-code>
+        <location>/pages/404-error.html</location>
+    </error-page>
+    
     <jsp-config>
         <jsp-property-group>
             <url-pattern>*.jsp</url-pattern>
@@ -55,4 +72,18 @@
         <servlet-name>exbGrupo</servlet-name>
         <url-pattern>/exbGrupo</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>io.github.marcondesnjr.sismovie.servlets.Index</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>  
+        <welcome-file>index</welcome-file>  
+    </welcome-file-list>
+
 </web-app>

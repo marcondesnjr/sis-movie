@@ -1,38 +1,54 @@
-<%-- 
-    Document   : cadastraram
-    Created on : 20/10/2015, 14:33:08
-    Author     : José Marcondes do Nascimento Junior
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <form action="CadastroUsuario" method="post" enctype="multipart/form-data">
-                <label for="foto">Faça Upload da sua foto</label><br>
-                <input type="file" name="foto" id="foto"><br>
-                <label for="nome">Digite seu nome</label><br>
-                <input type="text" name="nome"  id="nome" required><br>
-                <label for="sobrenome">Digite seu sobrenome</label><br>
-                <input type="text" name="sobrenome" id="sobrenome"><br>
-                <label for="apelido">Digite seu apelido</label><br>
-                <input type="text" name="apelido" id="apelido"><br>
-                <label for="email">Digite seu email</label><br>
-                <input type="email" name="email" id="email"><br>
-                <label for="senha">Digite sua senha</label><br>
-                <input type="password" name="senha" id="senha"><br>
-                <label for="dataNasc">Digite sua data de Nascimento</label><br>
-                <input type="date" name="dataNasc" id="dataNasc"><br>
-                <label for="cidade">Digite sua cidade</label><br>
-                <input type="text" name="cidade" id="cidade"><br>
-                <label for="estado">Digite seu estado</label><br>
-                <input type="text" name="estado" id="estado"><br>
+<div class="container">
+    <div class="row row-centered">
+        <div class="col-sm-6 col-centered">
+            <form class="form-horizontal" action="singin/send/" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="foto">Fa�a Upload da sua foto</label>
+                    <input class="form-control" type="file" name="foto" id="foto" required>
+                </div>
+                <div class="form-group">
+                    <label for="nome">Digite seu nome</label>
+                    <input class="form-control" type="text" name="nome"  id="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="sobrenome">Digite seu sobrenome</label>
+                    <input class="form-control" type="text" name="sobrenome" id="sobrenome" required>
+                </div>
+                <div class="form-group">
+                    <label for="apelido">Digite seu apelido</label>
+                    <input class="form-control" type="text" name="apelido" id="apelido">
+                </div>
+                <div class="form-group">
+                    <label for="email">Digite seu email</label>
+                    <input class="form-control" type="email" name="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Digite sua senha</label>
+                    <input class="form-control" type="password" name="senha" id="senha" required>
+                </div>
+                <div class="form-group">
+                    <label for="dataNasc">Digite sua data de Nascimento</label>
+                    <input class="form-control" type="date" name="dataNasc" id="dataNasc" required>
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Digite sua cidade</label>
+                    <input class="form-control" type="text" name="cidade" id="cidade" required>
+                </div>
+                <div class="form-group" >
+                    <label for="estado">Digite seu estado</label>
+                    <select id="estado" name="estado" required>
+                        ${estados}
+                        <c:forEach items="${estados}" var="estado">
+                            <option value="${estado}">${estado}</option>
+                        </c:forEach>
+                    </select>
+                </div>
                 <input type="hidden" value="1" name="adm" id="adm">
-                <input type="submit" value="enviar"><br>
-        </form>
-    </body>
-</html>
+                <div class="form-group">
+                    <input type="submit" value="enviar"><br>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+        

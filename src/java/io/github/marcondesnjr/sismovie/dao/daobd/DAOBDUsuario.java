@@ -53,10 +53,10 @@ public class DAOBDUsuario implements DAOUsuario {
 
 
     @Override
-    public void excluir(Usuario usuario) throws PersistenceException{
+    public void excluir(String email) throws PersistenceException{
         String sql = "DELETE FROM USUARIO WHERE email = ?";
         try(PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setString(1, usuario.getEmail());
+            ps.setString(1, email);
             ps.executeUpdate();
             conn.commit();
         } catch (SQLException ex) {
@@ -173,6 +173,27 @@ public class DAOBDUsuario implements DAOUsuario {
     public void editar(Usuario usuario) throws PersistenceException {
         String sql = "UPDATE usuario SET senha=?, nome=?, sobrenome=?, apelido=?, foto=?, dt_nasc=?,cidade=?, estado=?, permissao=?"
                 + " WHERE email = ?";
+        try(PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setString(1, usuario.getSenha());
+            ps.setString(2, usuario.getNome());
+            ps.setString(3, usuario.getSobrenome());
+            ps.setString(4, usuario.getApelido());
+            ps.setString(5, usuario.getFoto());
+            ps.setDate(6, Date.valueOf(usuario.getDataNasc()));
+            ps.setString(7, usuario.getCidade());
+            ps.setString(8, usuario.getEstado().name());
+            ps.setString(9, usuario.getPermissao().name());
+            ps.setString(10, usuario.getEmail());
+            ps.executeUpdate();
+            conn.commit();   
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException(ex1);
+            }
+        }
     }
     
 

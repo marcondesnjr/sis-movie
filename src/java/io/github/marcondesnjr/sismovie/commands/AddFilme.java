@@ -91,7 +91,7 @@ public class AddFilme implements Command {
             filme.setDiretores(diretores);
             filme.setGeneros(generos);
             GerenciadorFilme.salvar(filme);
-            response.sendRedirect("control?command=InitExbFilme&id="+filme.getId());
+            response.sendRedirect(request.getContextPath()+"/filme/"+filme.getId());
             return null;
         } catch (Exception ex) {
             Logger.getLogger(PhotoUpload.class.getName()).log(Level.SEVERE, null, ex);

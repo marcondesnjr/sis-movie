@@ -7,11 +7,11 @@
                 <form  class="center" action="login/" method="post">
                     <div class="form-group">
                         <label for="login">Email:</label>
-                        <input type="text" name="login" id="login"><br>
+                        <input type="text" name="login" id="login" required><br>
                     </div>
                     <div class="form-group">
                         <label for="senha">Senha:</label>
-                        <input type="password" name="senha" id="senha"><br>
+                        <input type="password" name="senha" id="senha" required><br>
                     </div>
                     <input type="submit">
                 </form>
@@ -35,7 +35,7 @@
                 <div class="col-md-4 col-xs-8 col-sm-6 col-centered">
 
                     <div class="ih-item square colored effect4">
-                        <a href="control?command=InitExbFilme&id=${filme.id}">
+                        <a href="filme/${filme.id}">
                             <div class="img"><img src="${filme.foto}" alt="Capa do Filme"></div>
                             <div class="mask1"></div>
                             <div class="mask2"></div>

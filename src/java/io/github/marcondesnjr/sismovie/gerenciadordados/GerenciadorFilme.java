@@ -18,7 +18,7 @@ public class GerenciadorFilme {
     
     public static List<Filme> lastFilmes(int n) throws PersistenceException {
         try (DAOFilme dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDaoFilme();) {
-            List<Filme> filmes = dao.localizarUltimos(10);
+            List<Filme> filmes = dao.localizarUltimos(n);
             return filmes;
         }
     }

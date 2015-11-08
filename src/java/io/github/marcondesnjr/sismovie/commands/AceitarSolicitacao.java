@@ -23,7 +23,7 @@ public class AceitarSolicitacao implements Command{
             Usuario rem = SisMovie.localizarUsuario(email);
             Usuario dest = (Usuario) request.getSession().getAttribute("usrLog");
             Amizade.aceitarSolicitacao(new Solicitacao(rem, dest));
-            response.sendRedirect("control?command=Home");
+            response.sendRedirect(request.getContextPath()+"/home/");
             return null;
         } catch (PersistenceException ex) {
             return ErrorPages.PERSISTENCE_ERROR.getPAGE();

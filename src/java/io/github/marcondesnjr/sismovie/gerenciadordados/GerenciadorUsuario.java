@@ -65,5 +65,17 @@ public class GerenciadorUsuario {
             return Arrays.asList(usr.toArray(new Usuario[0]));
         }
     }
+    
+    public static void atualizar(Usuario usr) throws PersistenceException{
+        try (DAOUsuario dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDaoUsuario()){
+            dao.editar(usr);
+        }
+    }
+    
+    public static void excluir(String email) throws PersistenceException{
+       try (DAOUsuario dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS).criarDaoUsuario()){
+            dao.excluir(email);
+        } 
+    }
 
 }

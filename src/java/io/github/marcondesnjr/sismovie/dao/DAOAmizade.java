@@ -14,6 +14,7 @@ public interface DAOAmizade extends AutoCloseable{
     public void atualizar(Solicitacao sol) throws PersistenceException;
     public List<Usuario> localizarAmigos(Usuario usr) throws PersistenceException;
     public void deletar(String rem, String dest) throws PersistenceException;
+    public boolean existeSolicitacao(Usuario usr, Usuario other) throws PersistenceException;
     @Override
     public void close();
 }

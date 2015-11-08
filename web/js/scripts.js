@@ -12,11 +12,7 @@ function setFormValue(id,val){
 }
 
 function addGenero(e){
-    $("<select name='genero' id='genero'>\n\
-        <c:forEach items='{generos}' var='gen'>\n\
-            <option selected value='${gen.name}'>${gen}</option>\n\
-        </c:forEach>\n\
-    </select>").insertBefore(e);
+    $("#genero").clone().insertBefore(e);
     e.preventDefault();
     return false;
     

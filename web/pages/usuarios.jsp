@@ -11,7 +11,7 @@
             <div class="col-lg-1 col-md-2">
                     <div class="mini-block">
                         <img src="${usuario.foto}" alt="${usuario.nome}">
-                        <span><a href="control?command=ExibirUsuario&email=${usuario.email}"><c:out value="${usuario.nome} ${usuario.sobrenome}"/></a></span>
+                    <span><a href="usr/${usuario.email}"><c:out value="${usuario.nome} ${usuario.sobrenome}"/></a></span>
                 </div>
             </div>
         </c:forEach>

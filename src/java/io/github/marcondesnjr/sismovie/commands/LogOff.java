@@ -16,6 +16,7 @@ public class LogOff implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.getSession().setAttribute("usrLog", null);
+            request.getSession().setAttribute("adm", 0);
             response.sendRedirect("control?command=Index");
             return null;
         } catch (IOException ex) {

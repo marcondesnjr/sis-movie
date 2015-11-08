@@ -54,7 +54,7 @@
         <div class="col-xs-12 col-sm-3 col-md-3">
             <div class="panel-filme-left">
                 <img class="foto-movie" src="${filme.foto}" alt="Foto do Filme">
-                <div class="info-movie">
+                <div class="info">
                     <span>Rating: ${media}</span>
                     <a href="#" data-toggle="modal" data-target="#alv"><img src alt="AvaliarFilme"></a>
                     <a href="#" data-toggle="modal" data-target="#rec"><img src alt="Recomendar Filme"></a>
@@ -73,7 +73,7 @@
                     <div class="alv-separpator">
                         <div class="row">
                             <div class="col-xs-4 col-sm-2">
-                                <a href="control?command=ExbirUsuario&email=${avl.usr.email}"><img class="miniature-usr" src="${avl.usr.foto}" alt="foto do usuário"></a>
+                                <a href="usr/${avl.usr.email}"><img class="miniature-usr" src="${avl.usr.foto}" alt="foto do usuário"></a>
                             </div>
                             <div class="col-xs-8 col-sm-10">
                                 <div class="row">

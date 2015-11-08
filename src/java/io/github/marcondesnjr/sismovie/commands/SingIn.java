@@ -3,8 +3,10 @@ package io.github.marcondesnjr.sismovie.commands;
 import io.github.marcondesnjr.sismovie.Estado;
 import io.github.marcondesnjr.sismovie.Permissao;
 import io.github.marcondesnjr.sismovie.SisMovie;
+import io.github.marcondesnjr.sismovie.Usuario;
 import io.github.marcondesnjr.sismovie.dao.AlreadyExistsException;
 import io.github.marcondesnjr.sismovie.dao.PhotoUpload;
+import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorUsuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +26,7 @@ import org.apache.tomcat.util.http.fileupload.UploadContext;
 @MultipartConfig
 public class SingIn implements Command{
 
-    private final String DIRETORY = "img_perfil";
+    public static final String DIRETORY_PERFIL = "img_perfil";
     
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){
@@ -32,7 +34,7 @@ public class SingIn implements Command{
             
             Map<String,String> param = new HashMap<>();
             
-            File uploadedFile = PhotoUpload.upload(request, DIRETORY, "perfil", ".jpg", param);
+            File uploadedFile = PhotoUpload.upload(request, DIRETORY_PERFIL, "perfil", ".jpg", param);
             
             String nome = param.get("nome");
             String sobrenome = param.get("sobrenome");
@@ -40,19 +42,22 @@ public class SingIn implements Command{
             String senha =  param.get("senha");
             String data =  param.get("dataNasc");
             String cidade = param.get("cidade");
+            String apelido = param.get("apelido");
             Estado est = SisMovie.getEstadoPelaSigla(param.get("estado"));
             LocalDate dataNasc = LocalDate.parse(data);
-            String foto = uploadedFile != null? DIRETORY +"/"+ uploadedFile.getName(): null;
-            
+            String foto = uploadedFile != null? DIRETORY_PERFIL +"/"+ uploadedFile.getName(): null;
+            Usuario usr = null;
             if(param.get("adm") != null &&  param.get("adm").equals("1")){
-                
+                usr = new Usuario(nome, sobrenome, email, senha, dataNasc, cidade, est, Permissao.ADMINISTRADOR);
             }
             else{
-                SisMovie.cadastrarUsuario(foto,nome, sobrenome, email, senha, dataNasc, cidade, est, Permissao.USUARIO);
+                usr = new Usuario(nome, sobrenome, email, senha, dataNasc, cidade, est, Permissao.USUARIO);
             }
+            usr.setFoto(foto);
+            usr.setApelido(apelido);
+            GerenciadorUsuario.salvar(usr);
             
-            response.sendRedirect("control?command=Index");
-            
+            response.sendRedirect(request.getContextPath()+"/index/");
             return null;
         } catch (AlreadyExistsException ex) {
             return null;

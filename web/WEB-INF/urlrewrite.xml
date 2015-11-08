@@ -6,7 +6,11 @@
 
 <urlrewrite>
 
-     <rule>
+    <rule>
+       <from>/editar/usr/</from>
+       <to>../../control?command=EditaUsuario</to>
+    </rule>
+    <rule>
        <from>/usr/(.*)</from>
        <to>../control?command=ExbUsuario&amp;email=$1</to>
     </rule>
@@ -23,24 +27,36 @@
        <to>../control?command=Home</to>
     </rule>
     <rule>
+       <from>/singin/page/adm/</from>
+       <to>../../../control?command=SingInPageAdm</to>
+    </rule>
+    <rule>
        <from>/singin/page</from>
        <to>../control?command=SingInPage</to>
     </rule>
     <rule>
-       <from>/singin/send</from>
-       <to>../control?command=SingIn</to>
+       <from>/singin/send/</from>
+       <to>../../control?command=SingIn</to>
     </rule>
     <rule>
        <from>/sol/acc/(.*)</from>
-       <to>../control?command=AceitarSolicitacao&amp;email=$1</to>
+       <to>../../control?command=AceitarSolicitacao&amp;email=$1</to>
     </rule>
     <rule>
        <from>/sol/rem/(.*)</from>
-       <to>../control?command=RejeitarSolicitacao&amp;email=$1</to>
+       <to>../../control?command=RejeitarSolicitacao&amp;email=$1</to>
     </rule>
     <rule>
-       <from>/cadastrar/filme</from>
-       <to>../control?command=ExbCadastrarFilme</to>
+       <from>/sol/(.*)</from>
+       <to>../control?command=SolicitarAmizade&amp;email=$1</to>
+    </rule>
+    <rule>
+       <from>/cadastrar/filme/send/</from>
+       <to>../../../control?command=AddFilme</to>
+    </rule>
+    <rule>
+       <from>/cadastrar/filme/</from>
+       <to>../../control?command=ExbCadastrarFilme</to>
     </rule>
     <rule>
        <from>/busca/filme</from>
@@ -49,10 +65,6 @@
     <rule>
        <from>cadastrar/grupo</from>
        <to>../control?command=AddGrupo</to>
-    </rule>
-    <rule>
-       <from>cadastrar/filme/send/</from>
-       <to>../control?command=AddFilme</to>
     </rule>
     <rule>
        <from>busca/filme/send/</from>
@@ -82,6 +94,20 @@
        <from>/grupo/([0-9]+)</from>
        <to>../control?command=ExbGrupo&amp;id=$1</to>
     </rule>
-    
-
+    <rule>
+       <from>/busca/grupo/page/</from>
+       <to>../../../control?command=ExbBuscaGrupo</to>
+    </rule>
+    <rule>
+       <from>/participar/grupo/([0-9]+)</from>
+       <to>../../control?command=ParticiparGrupo&amp;id=$1</to>
+    </rule>
+    <rule>
+       <from>/busca/grupo/send/</from>
+       <to>../../../control?command=BuscaGrupo</to>
+    </rule>
+     <rule>
+       <from>/del/</from>
+       <to>../control?command=RemUsuario</to>
+    </rule>
 </urlrewrite>

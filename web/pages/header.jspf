@@ -111,20 +111,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <c:if test="${usrLog ne null}">
                                         <li><a href="home/">Minha conta</a></li>
                                         <li><a href="busca/usuario/">Encontre Amigos</a></li>
-                                        <li><a href="gallery.html">Meus Grupos</a></li>
+                                        <li><a href="busca/grupo/page/">Encontre Grupos</a></li>
                                         <li><a href="logoff/">Logoff</a></li>
                                         </c:if>
                                         <c:if test="${adm eq '1'}" >
                                         <li><div class="dropdown">
                                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                                    Dropdown
+                                                    Administrador
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    <li><a href="#">Novo filme</a></li>
-                                                    <li><a href="#">Another action</a></li>
-                                                    <li><a href="#">Something else here</a></li>
-                                                    <li><a href="#">Separated link</a></li>
+                                                    <li><a href="cadastrar/filme/">Novo filme</a></li>
+                                                    <li><a href="singin/page/adm/">Cadastrar Administrador</a></li>
                                                 </ul>
                                             </div>
                                         </li>

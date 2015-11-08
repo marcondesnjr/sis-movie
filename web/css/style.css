@@ -76,16 +76,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 
-.panel-usr, .panel-filme{
+.panel, .panel-filme{
     background: rgba(51, 130, 201, 0.51);
     padding: 30px;
 }
 
-.panel-usr h2, .panel-usr h2{
+.panel h2, .panel-usr h2{
     border-bottom: dashed black thin;
 }
 
-.panel-usr ul{
+.panel ul{
     list-style: none;
 }
 
@@ -1888,7 +1888,7 @@ ul.contact_info span {
 	}
         
         .exb-filme:before {
-		top: -13.4%;
+		top: -9.4%;
 	}
 	.exb-filme:after {
 		top: 100%;
@@ -1995,7 +1995,7 @@ ul.contact_info span {
 		top: -6.5%;
 	}
         .exb-filme:before {
-		top: -7.5%;
+		top: -6%;
 	}
 	h2.heading {
 		font-size: 3.8em;
@@ -2140,7 +2140,7 @@ ul.contact_info span {
 		top: -6.5%;
 	}
         .exb-filme:before {
-		top: -4.7%;
+		top: -3%;
 	}
 	h2.heading {
 		font-size: 3.6em;
@@ -2750,8 +2750,16 @@ img{
 .foto-movie{
     box-shadow: 1px 1px 10px;
 }
-.info-movie:nth-child(even){
+.info:nth-child(even){
     margin: 15px 0px;
+}
+
+.info-usr:nth-child(even){
+    margin: 30px 0px;
+}
+
+.background-white{
+    background: rgba(255,255,255,0.3);
 }
 
 /*SM*/
@@ -2766,3 +2774,5 @@ img{
         height: 800px;
     }
 }
+
+

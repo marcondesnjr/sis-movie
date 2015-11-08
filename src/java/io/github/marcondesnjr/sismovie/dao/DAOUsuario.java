@@ -7,7 +7,7 @@ public interface DAOUsuario extends AutoCloseable{
 
     public void persistir(Usuario usuario) throws PersistenceException, AlreadyExistsException;
 
-    public void excluir(Usuario usuario) throws PersistenceException;
+    public void excluir(String email) throws PersistenceException;
 
     public void editar(Usuario usuario) throws PersistenceException;
     
@@ -22,7 +22,7 @@ public interface DAOUsuario extends AutoCloseable{
     public List<Usuario> localizar() throws PersistenceException;
     
     public List<Usuario> perquisarNome(String nome) throws PersistenceException;
-
+ 
     @Override
     public void close();
     

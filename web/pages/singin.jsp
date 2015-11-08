@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-md-4 col-lg-4 col-sm-2"></div>
         <div class="col-md-4 col-lg-4 col-sm-8 col-xs-12">
-            <form action="singin/send" method="post" enctype="multipart/form-data">
+            <form action="singin/send/" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="foto">Faça Upload da sua foto</label>
-                    <input class="form-control" type="file" name="foto" id="foto">
+                    <input class="form-control" type="file" name="foto" id="foto" required>
                 </div>
                 <div class="form-group">
                     <label for="nome">Digite seu nome</label>
@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group">
                     <label for="sobrenome">Digite seu sobrenome</label>
-                    <input class="form-control" type="text" name="sobrenome" id="sobrenome">
+                    <input class="form-control" type="text" name="sobrenome" id="sobrenome" required>
                 </div>
                 <div class="form-group">
                     <label for="apelido">Digite seu apelido</label>
@@ -21,23 +21,23 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Digite seu email</label>
-                    <input class="form-control" type="email" name="email" id="email">
+                    <input class="form-control" type="email" name="email" id="email" required>
                 </div>
                 <div class="form-group">
                     <label for="senha">Digite sua senha</label>
-                    <input class="form-control" type="password" name="senha" id="senha">
+                    <input class="form-control" type="password" name="senha" id="senha" required>
                 </div>
                 <div class="form-group">
                     <label for="dataNasc">Digite sua data de Nascimento</label>
-                    <input class="form-control" type="date" name="dataNasc" id="dataNasc">
+                    <input class="form-control" type="date" name="dataNasc" id="dataNasc" required>
                 </div>
                 <div class="form-group">
                     <label for="cidade">Digite sua cidade</label>
-                    <input class="form-control" type="text" name="cidade" id="cidade">
+                    <input class="form-control" type="text" name="cidade" id="cidade" required>
                 </div>
                 <div class="form-group">
                     <label for="estado">Digite seu estado</label>
-                    <select id="estado" name="estado">
+                    <select id="estado" name="estado" required>
                         ${estados}
                         <c:forEach items="${estados}" var="estado">
                             <option value="${estado}">${estado}</option>

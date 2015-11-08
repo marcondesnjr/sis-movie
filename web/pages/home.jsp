@@ -29,16 +29,18 @@
     <div class="row">
         <div class="col-sm-2">
             <img id="pfimg" src="${usrLog.foto}" alt="Imagem de perfil">
-            <form>
-                <label for="foto">Mude sua foto</label>
-                <input type="file" name="foto" id="foto">
-                <input type="submit">
-            </form>
-            <a href="#" data-toggle="modal" data-target="#new-group"><img src alt="Criar Novo Grupo"></a>
+            <div class="info-usr">          
+                <a href="#" data-toggle="modal" data-target="#new-group"><img src="img/add_grupo.png" alt="Criar Novo Grupo"></a>
+                <a href="del/"><img src="img/rem_grupo.png" alt="Excluir Conta"></a>
+            </div>
         </div>
         <div class="col-sm-6">
             <h1>Edite as suas informações</h1>
-            <form action="CadastroUsuario" method="post" enctype="multipart/form-data">
+            <form action="editar/usr/" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="foto">Mude sua foto</label>
+                    <input type="file" name="foto" id="foto">
+                </div>
                 <div class="form-group">
                     <label for="nome">Digite seu nome</label>
                     <input class="form-control" type="text" name="nome"  id="nome" value="${usrLog.nome}">
@@ -54,6 +56,10 @@
                 <div class="form-group">
                     <label for="email">Digite seu email</label>
                     <input class="form-control" type="email" name="email" id="email" value="${usrLog.email}">
+                </div>
+                <div class="form-group">
+                    <label for="senhaOld">Digite sua senha antiga</label>
+                    <input class="form-control" type="password" name="senhaOld" id="senhaOld">
                 </div>
                 <div class="form-group">
                     <label for="senha">Digite sua senha</label>
@@ -76,9 +82,7 @@
                         </c:forEach>
                     </select>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="salvar"><br>
-                </div>      
+                    <input type="submit" value="salvar"><br>  
             </form>
         </div>
         <%-- Coluna da Direita --%>
@@ -89,20 +93,20 @@
                 <c:forEach items="${solicitacoes}" var="sol">
                     <div class="col-md-12">
                         <span>${sol.remetente.nome}</span>
-                        <a href="control?command=AceitarSolicitacao&email=${sol.remetente.email}">Aceitar</a>
-                        <a href="control?command=RejeitarSolicitacao&email=${sol.remetente.email}">Rejeitar</a>
+                        <a href="sol/acc/${sol.remetente.email}">Aceitar</a>
+                        <a href="sol/rem/${sol.remetente.email}">Rejeitar</a>
                     </div>
                 </c:forEach>
                 <c:forEach items="${recomendacoes}" var="rec">
                     <div class="col-md-12">
                         <div class="col-md-2">
-                            <a href="control?command=ExibirUsuario&email${rec.rem.email}"> <img src="${rec.rem.foto}"></a>
+                            <a href="usr/${rec.rem.email}"> <img src="${rec.rem.foto}"></a>
                         </div>
                         <div class="col-md-8">
-                            <h5><a href="control?command=InitExbFilme&id=${rec.filme.id}">${rec.filme.titulo}</a></h5>
+                            <h5><a href="filme/${rec.filme.id}">${rec.filme.titulo}</a></h5>
                         </div>
                         <div class="col-md-2">
-                            <img src="${rec.filme.foto}">
+                            <img src="${rec.filme.foto}" alt="Foto do Filme">
                         </div>
                     </div>
                 </c:forEach>
@@ -116,7 +120,7 @@
                     <div class="col-md-3">
                         <div class="mini-block">
                             <img src="${usuario.foto}" alt="${usuario.nome}">
-                            <span><a href="control?command=ExibirUsuario&email=${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
+                            <span><a href="usr/${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
                         </div>
                     </div>
                 </c:forEach>

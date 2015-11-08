@@ -132,6 +132,28 @@ public class DAOBDAmizade implements DAOAmizade{
             }
         }
     }
+    
+    @Override
+    public boolean existeSolicitacao(Usuario usr, Usuario other) throws PersistenceException{
+        String sql ="SELECT * FROM AMIZADE_USUARIO "
+                + "WHERE (remetente = ? AND destinatario = ?) OR (remetente = ? AND destinatario = ?)";
+        try(PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setString(1, usr.getEmail());
+            ps.setString(2, other.getEmail());
+            ps.setString(3, other.getEmail());
+            ps.setString(4, usr.getEmail());
+            try(ResultSet rs = ps.executeQuery()){
+                return rs.next();
+            }
+        } catch (SQLException ex) {
+            try {
+                conn.rollback();
+                throw new PersistenceException(ex);
+            } catch (SQLException ex1) {
+                throw new PersistenceException("Erro ao tentar realizar ROLLBACK",ex1);
+            }
+        }
+    }
 
     @Override
     public void deletar(String rem, String dest) throws PersistenceException {

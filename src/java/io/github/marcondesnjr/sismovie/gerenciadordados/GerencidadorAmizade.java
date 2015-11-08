@@ -50,4 +50,11 @@ public class GerencidadorAmizade {
         }
     }
 
+    public static boolean exists(Usuario usr, Usuario other) throws PersistenceException{
+        try (DAOAmizade dao = CriadorFabrica.criarFabrica(CriadorFabrica.BANCO_DE_DADOS)
+                .criarDAOAmizade()) {
+            return dao.existeSolicitacao(usr, other);
+        }
+    }
+    
 }
