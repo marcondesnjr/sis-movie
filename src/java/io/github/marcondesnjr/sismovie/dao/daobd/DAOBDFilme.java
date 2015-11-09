@@ -74,6 +74,9 @@ public class DAOBDFilme implements DAOFilme {
     @Override
     public Filme localizar(int id) throws PersistenceException{
         String sql = "SELECT * FROM FILME WHERE id = ?";
+            DAOBDGeneroFilme daoGF= new DAOBDGeneroFilme(conn);
+            DAOBDAtor daoAt = new DAOBDAtor(conn);
+            DAOBDDiretor daoD = new DAOBDDiretor(conn);
         try(PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setInt(1, id);
             try(ResultSet rs = ps.executeQuery()){
@@ -84,6 +87,9 @@ public class DAOBDFilme implements DAOFilme {
                     Year ano = Year.parse(rs.getString("ano"));
                     Filme fm = new Filme(foto, titulo, sinopse, ano);
                     fm.setId(rs.getInt("id"));
+                    fm.setAtores(daoAt.localizarAtorFilme(fm));
+                    fm.setGeneros(daoGF.localizarGeneroFilme(fm));
+                    fm.setDiretores(daoD.localizarDiretorFilme(fm));
                     conn.commit();
                     return fm;
                 }
@@ -157,8 +163,8 @@ public class DAOBDFilme implements DAOFilme {
 
     @Override
     public List<Filme> localizar(String ord, String gen, String ator, String diretor, String tit, boolean desc) throws PersistenceException{
-        StringBuilder builder = new StringBuilder("SELECT DISTINCT id,foto,titulo,sinopse,ano, avl_media(id) rating FROM FILME JOIN GENERO_FILME GF ON id = GF.id_filme "
-                + "JOIN ATOR_FILME AT ON id = AT.id_filme JOIN DIRETOR_FILME D ON id = D.id_filme WHERE '1'='1'");
+        StringBuilder builder = new StringBuilder("SELECT DISTINCT id,foto,titulo,sinopse,ano, avl_media(id) rating FROM FILME LEFT JOIN GENERO_FILME GF ON id = GF.id_filme "
+                + " LEFT JOIN ATOR_FILME AT ON id = AT.id_filme LEFT JOIN DIRETOR_FILME D ON id = D.id_filme WHERE '1'='1'");
         if(gen != null)
             builder.append(" AND genero = ? ");
         if(ator != null)
@@ -167,10 +173,10 @@ public class DAOBDFilme implements DAOFilme {
             builder.append(" AND diretor ILIKE ? ");
         if(tit != null){
             builder.append(" AND titulo ILIKE ? ");
-            if(desc)
-                builder.append(" DESC");
         }
         builder.append(" ORDER BY ").append(ord);
+        if(desc)
+                builder.append(" DESC");
         String sql = builder.toString();
         
         try(PreparedStatement ps = conn.prepareStatement(sql)){

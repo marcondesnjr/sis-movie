@@ -24,7 +24,7 @@ public class AddGrupo implements Command{
             Usuario usr = (Usuario) request.getSession().getAttribute("usrLog");
             Grupo gp = new Grupo(nome, desc, usr);
             GerenciadorGrupo.salvar(gp);
-            response.sendRedirect("control?command=ExbGrupo");
+            response.sendRedirect(request.getContextPath()+"/grupo/"+gp.getId());
             return null;
         } catch (PersistenceException ex) {
             Logger.getLogger(AddGrupo.class.getName()).log(Level.SEVERE, null, ex);

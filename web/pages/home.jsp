@@ -1,3 +1,25 @@
+<div class="modal fade" id="remover-conta">
+    <div class="modal-dialog">
+        <div class="modal-content" style="padding: 10px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Você está prestes a remover sua conta</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" action="del/" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Sua senha:</label>
+                        <input class="form-control" type="password" maxlength="30" name="senha" id="senha">
+                    </div>
+                    <input class="btn btn-default" type="submit" value="Remover">
+                    <input type="hidden" value="${usrLog.email}" name="email">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div class="modal fade" id="new-group">
     <div class="modal-dialog">
         <div class="modal-content" style="padding: 10px">
@@ -6,7 +28,7 @@
                 <h4 class="modal-title">Crie um novo grupo</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="control?command=CriarGrupo" method="POST">
+                <form class="form-horizontal" action="cadastrar/grupo/" method="POST">
                     <div class="form-group">
                         <label for="nome">Nome:</label>
                         <input type="text" maxlength="30" name="nome" id="nome">
@@ -31,7 +53,7 @@
             <img id="pfimg" src="${usrLog.foto}" alt="Imagem de perfil">
             <div class="info-usr">          
                 <a href="#" data-toggle="modal" data-target="#new-group"><img src="img/add_grupo.png" alt="Criar Novo Grupo"></a>
-                <a href="del/"><img src="img/rem_grupo.png" alt="Excluir Conta"></a>
+                <a href="#" data-toggle="modal" data-target="#remover-conta"><img src="img/rem_grupo.png" alt="Excluir Conta"></a>
             </div>
         </div>
         <div class="col-sm-6">
@@ -59,7 +81,7 @@
                 </div>
                 <div class="form-group">
                     <label for="senhaOld">Digite sua senha antiga</label>
-                    <input class="form-control" type="password" name="senhaOld" id="senhaOld">
+                    <input class="form-control" type="password" name="senhaOld" id="senhaOld" required>
                 </div>
                 <div class="form-group">
                     <label for="senha">Digite sua senha</label>
@@ -82,7 +104,7 @@
                         </c:forEach>
                     </select>
                 </div>
-                    <input type="submit" value="salvar"><br>  
+                <input type="submit" value="salvar"><br>  
             </form>
         </div>
         <%-- Coluna da Direita --%>

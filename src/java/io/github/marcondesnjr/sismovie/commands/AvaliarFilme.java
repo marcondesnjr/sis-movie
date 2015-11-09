@@ -32,7 +32,7 @@ public class AvaliarFilme implements Command{
             Usuario usr = (Usuario) request.getSession().getAttribute("usrLog");
             avl.setUsr(usr);
             GerenciadorAvaliacao.salvar(fm, avl, usr);
-            response.sendRedirect("control?command=InitExbFilme&id="+idFilme);
+            response.sendRedirect("filme/"+idFilme);
             return null;
         } catch (IOException | PersistenceException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);

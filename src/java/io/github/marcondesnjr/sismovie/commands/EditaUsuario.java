@@ -47,27 +47,33 @@ public class EditaUsuario implements Command{
             String cidade = param.get("cidade");
             String apelido = param.get("apelido");
             Estado est = SisMovie.getEstadoPelaSigla(param.get("estado"));
-            LocalDate dataNasc = LocalDate.parse(data);
-//            String foto = uploadedFile != null? SingIn.DIRETORY_PERFIL +"/"+ uploadedFile.getName(): null;
+            LocalDate dataNasc = null;
+            if(!data.equals(""))
+                dataNasc = LocalDate.parse(data);
+            String foto = uploadedFile != null? SingIn.DIRETORY_PERFIL +"/"+ uploadedFile.getName(): null;
             
             Usuario usrLog = (Usuario) request.getSession().getAttribute("usrLog");
             Usuario usr = GerenciadorUsuario.localizar(usrLog.getEmail(), senhaOld);
             if(usr != null){
-    //            usr.setFoto(foto);
-                if(nome != null)
+                if(!foto.equals(""))
+                    usr.setFoto(foto);
+                if(!nome.equals(""))
                     usr.setNome(nome);
-                if(nome != null)
+                if(!sobrenome.equals(""))
                     usr.setSobrenome(sobrenome);
-                if(nome != null)
+                if(senha.equals(""))
+                    usr.setSenha(senhaOld);
+                else
                     usr.setSenha(senha);
-                if(nome != null)
+                if(!data.equals(""))
                     usr.setDataNasc(dataNasc);
-                if(nome != null)
+                if(!cidade.equals(""))
                     usr.setCidade(cidade);
-                if(nome != null)
+                if(est != null)
                     usr.setEstado(est);
                 usr.setApelido(apelido);
                 GerenciadorUsuario.atualizar(usr);
+                request.getSession().setAttribute("usrLog", usr);
             }
             
             response.sendRedirect(request.getContextPath()+"/home/");

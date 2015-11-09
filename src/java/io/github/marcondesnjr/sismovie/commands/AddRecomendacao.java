@@ -8,6 +8,7 @@ import io.github.marcondesnjr.sismovie.dao.PersistenceException;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorFilme;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorRecomandacao;
 import io.github.marcondesnjr.sismovie.gerenciadordados.GerenciadorUsuario;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +31,12 @@ public class AddRecomendacao implements Command{
             Recomendacao rec = new Recomendacao(usr, fm);
             GerenciadorRecomandacao.salvar(rec, dest);
             dest.addRecomendacao(rec);
-            return "control?command=InitExbFilme&id="+idFilme;
+            response.sendRedirect(request.getContextPath()+"/filme/"+idFilme);
+            return null;
         } catch (PersistenceException ex) {
+            Logger.getLogger(AddRecomendacao.class.getName()).log(Level.SEVERE, null, ex);
+            return "persistenceError";
+        } catch (IOException ex) {
             Logger.getLogger(AddRecomendacao.class.getName()).log(Level.SEVERE, null, ex);
             return "persistenceError";
         }

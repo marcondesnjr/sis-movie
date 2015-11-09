@@ -20,8 +20,13 @@ public class RemUsuario implements Command{
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             Usuario usr = (Usuario) request.getSession().getAttribute("usrLog");
-            GerenciadorUsuario.excluir(usr.getEmail());
-            response.sendRedirect(request.getContextPath()+"/logoff/");
+            Usuario usrSenha = GerenciadorUsuario.localizar(usr.getEmail(), request.getParameter("senha"));
+            if(usrSenha != null){
+                GerenciadorUsuario.excluir(usr.getEmail());
+                response.sendRedirect(request.getContextPath()+"/logoff/");
+            }
+            else
+                response.sendRedirect(request.getContextPath()+"/home/");
             return null;
         } catch (IOException ex) {
             Logger.getLogger(RemUsuario.class.getName()).log(Level.SEVERE, null, ex);

@@ -38,8 +38,8 @@
     
     <div class="row">
         <c:forEach items="${filmes}" var="filme">
-            <div class="col-md-2">
-                <a href="control?command=InitExbFilme&id=${filme.id}"><img src="${filme.foto}"></a>
+            <div class="col-md-2 busca-filme-foto">
+                <a href="filme/${filme.id}"><img src="${filme.foto}"></a>
             </div>
         </c:forEach>
     </div>

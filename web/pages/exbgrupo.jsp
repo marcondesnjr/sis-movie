@@ -9,19 +9,21 @@
                 <form class="form-horizontal" action="control?command=AddTopico" method="POST">
                     <div class="form-group">
                         <label for="titulo">Titulo:</label>
-                        <input type="text" maxlength="30" name="titulo" id="titulo">
+                        <input type="text" maxlength="30" name="titulo" id="titulo" required>
                     </div>
                     <div class="form-group">
                         <label for="desc">Descricao:</label>
-                        <textarea class="form-control" name="desc" id="desc"></textarea>
+                        <textarea class="form-control" name="desc" id="desc" required></textarea>
                     </div>
                     <input type="hidden" name="filme-ref" id="filme-ref" value="">
                     <input type="hidden" name="grupo" id="grupo" value="${grupo.id}">
-                    <div class="container">
+                    <div class="container container-filme">
                         <div class="row">
                             <c:forEach items="${filmes}" var="filme">
                                 <div class="col-sm-3">
-                                    <a href="#" onclick="setFormValue('filme-ref',${filme.id})"><img src="${filme.foto}"></a>
+                                    <div class="mini-filme">
+                                        <img id="${filme.id}" src="${filme.foto}" onclick="setFormValue('filme-ref',${filme.id})">
+                                    </div>
                                 </div>
                             </c:forEach> 
                         </div>

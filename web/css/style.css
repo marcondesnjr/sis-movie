@@ -2762,6 +2762,20 @@ img{
     background: rgba(255,255,255,0.3);
 }
 
+.busca-filme-foto{
+    height: 200px;
+    overflow: hidden;
+}
+
+.container-filme{
+    height: 400px;
+    overflow: scroll;
+    max-width: 100%;
+}
+.mini-filme{
+    height: 150px;
+    overflow: hidden;
+}
 /*SM*/
 @media only screen and (min-width : 768px) {
     .img-movie-thumb, .foto-movie{

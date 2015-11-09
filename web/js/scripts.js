@@ -9,6 +9,10 @@ $(document).ready(function(){
 
 function setFormValue(id,val){
     $('#'+id).val(val);
+    var element = $('#'+val);
+    $(".changed").css("opacity", 1);
+    element.css("opacity", 0.5);
+    element.addClass("changed");
 }
 
 function addGenero(e){
