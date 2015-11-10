@@ -47,7 +47,9 @@ public class SingIn implements Command{
             LocalDate dataNasc = LocalDate.parse(data);
             String foto = uploadedFile != null? DIRETORY_PERFIL +"/"+ uploadedFile.getName(): null;
             Usuario usr = null;
-            if(param.get("adm") != null &&  param.get("adm").equals("1")){
+            Usuario usrlog = (Usuario) request.getSession().getAttribute("usrLog");
+            if(param.get("adm") != null &&  param.get("adm").equals("1")
+                    && usrlog != null && usrlog.getPermissao() == Permissao.ADMINISTRADOR){
                 usr = new Usuario(nome, sobrenome, email, senha, dataNasc, cidade, est, Permissao.ADMINISTRADOR);
             }
             else{

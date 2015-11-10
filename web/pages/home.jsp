@@ -114,7 +114,7 @@
                 <h2>Notificações</h2>
                 <c:forEach items="${solicitacoes}" var="sol">
                     <div class="col-md-12">
-                        <span>${sol.remetente.nome}</span>
+                        <span><a href="usr/${sol.remetente.email}">${sol.remetente.nome}</a></span>
                         <a href="sol/acc/${sol.remetente.email}">Aceitar</a>
                         <a href="sol/rem/${sol.remetente.email}">Rejeitar</a>
                     </div>
@@ -140,10 +140,7 @@
             <div class="row">
                 <c:forEach items="${usuarios}" var="usuario">
                     <div class="col-md-3">
-                        <div class="mini-block">
-                            <img src="${usuario.foto}" alt="${usuario.nome}">
-                            <span><a href="usr/${usuario.email}">${usuario.nome} ${usuario.sobrenome}</a></span>
-                        </div>
+                        <tagFile:mini-usr usr="${usuario}"/>
                     </div>
                 </c:forEach>
             </div>

@@ -13,7 +13,7 @@
                 <h2><c:out value="${usuario.nome} ${usuario.sobrenome}"/></h2>
                 <ul>
                     <li>Email: <c:out value="${usuario.email}"/></li>
-                    <li>Data de Nascimento: <c:out value="${usuario.dataNasc}"/></li>
+                    <li>Data de Nascimento: <ct:formatDate date="${usuario.dataNasc}"/></li>
                     <li>Cidade: <c:out value="${usuario.cidade}"/></li>
                     <li>Estado: <c:out value="${usuario.estado}"/></li>
                 </ul>

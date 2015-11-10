@@ -28,7 +28,6 @@
                 <h3>Ultimos Filmes</h3>
             </div>
         </div>
-        
         <div class="row row-centered">
             <c:forEach items="${filmes}" var="filme">
 

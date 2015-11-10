@@ -33,7 +33,7 @@ public class ExbGrupo implements Command{
             if(gp.getParticipantes().contains(usr)){
                 request.setAttribute("participante", true);
             }
-            return "exbGrupo";
+            return "pages/exbgrupo.jsp";
         } catch (PersistenceException ex) {
             Logger.getLogger(ExbGrupo.class.getName()).log(Level.SEVERE, null, ex);
             return "persistenceError";

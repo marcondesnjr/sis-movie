@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html lang="pt-br">
     <head>
         <base href="http://localhost:8080/SisMovieWeb/" />
-        <title>Interior Design a interior category Flat bootstrap Responsive Website Template | Home :: w3layouts</title>
+        <title>SisMovie</title>
         <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
         <link href="css/owl.carousel.css" rel="stylesheet">
         <link href="css/ihover.min.css" rel='stylesheet' type='text/css' />

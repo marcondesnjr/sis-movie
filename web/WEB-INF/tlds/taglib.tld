@@ -5,17 +5,15 @@
   <uri>CtTags</uri>
   
   <tag>
-      <name>listar</name>
-      <tag-class>io.github.marcondesnjr.sismovie.tags.AllMiniature</tag-class>
-      <body-content>empty</body-content>
-      
-      <attribute>
-          <name>lista</name>
-          <type>java.util.List</type>
-          <required>true</required>
-          <rtexprvalue>true</rtexprvalue>
-      </attribute>
-      
+    <name>formatDate</name>
+    <tag-class>io.github.marcondesnjr.sismovie.tags.FormatDate</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>date</name>
+      <type>java.time.LocalDate</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
   </tag>
   
 </taglib>

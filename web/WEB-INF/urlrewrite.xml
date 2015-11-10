@@ -92,6 +92,10 @@
        <to>../../control?command=BuscaUsuario</to>
     </rule>
     <rule>
+       <from>/participar/grupo/([0-9]+)</from>
+       <to>../../control?command=ParticiparGrupo&amp;id=$1</to>
+    </rule>
+    <rule>
        <from>/grupo/([0-9]+)</from>
        <to>../control?command=ExbGrupo&amp;id=$1</to>
     </rule>
@@ -99,10 +103,7 @@
        <from>/busca/grupo/page/</from>
        <to>../../../control?command=ExbBuscaGrupo</to>
     </rule>
-    <rule>
-       <from>/participar/grupo/([0-9]+)</from>
-       <to>../../control?command=ParticiparGrupo&amp;id=$1</to>
-    </rule>
+    
     <rule>
        <from>/busca/grupo/send/</from>
        <to>../../../control?command=BuscaGrupo</to>

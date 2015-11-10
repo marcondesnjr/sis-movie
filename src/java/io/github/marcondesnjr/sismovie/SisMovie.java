@@ -43,7 +43,7 @@ public class SisMovie {
     
     
     public static List<Filme> lastFilmes() throws SQLException, PersistenceException{
-        return GerenciadorFilme.lastFilmes(10);
+        return GerenciadorFilme.lastFilmes(9);
     }
     
     public static List<String> todosGeneros() throws PersistenceException{

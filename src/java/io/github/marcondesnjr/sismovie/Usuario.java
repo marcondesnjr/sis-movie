@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Usuario{
 
@@ -44,8 +42,6 @@ public class Usuario{
     public void setRecomendacoes(List<Recomendacao> recomendacoes) {
         this.recomendacoes = recomendacoes;
     }
-    
-    
     
     public void addRecomendacao(Recomendacao re){
         this.recomendacoes.add(re);
@@ -143,10 +139,6 @@ public class Usuario{
         this.grupos = grupos;
     }
     
-    
-    
-
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -168,8 +160,5 @@ public class Usuario{
         }
         return true;
     }
-
-  
-
         
 }

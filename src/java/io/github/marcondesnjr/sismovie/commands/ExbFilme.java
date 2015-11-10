@@ -35,7 +35,7 @@ public class ExbFilme implements Command{
             if(usr != null){
                 request.setAttribute("amigos", GerencidadorAmizade.localizarAmigos(usr));
             }
-            return "exibir-filme";
+            return "pages/exb-filme.jsp";
         } catch (PersistenceException ex) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             return ErrorPages.PERSISTENCE_ERROR.getPAGE();

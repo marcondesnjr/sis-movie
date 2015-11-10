@@ -27,7 +27,7 @@ public class ParticiparGrupo implements Command{
             GerenciadorParticipantes.salvar(gp, usr);
             gp.adicionarParticipante(usr);
             usr.addGrupo(gp);
-            response.sendRedirect("control?command=ExbGrupo&id="+gp.getId());
+            response.sendRedirect(request.getContextPath()+"/grupo/"+gp.getId());
             return null;
         } catch (PersistenceException ex) {
             Logger.getLogger(ParticiparGrupo.class.getName()).log(Level.SEVERE, null, ex);
